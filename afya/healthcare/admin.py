@@ -24,7 +24,10 @@ class UserProfileAdmin(admin.ModelAdmin):
     readonly_fields = ['id', 'user_id']
     fields = ['id', 'phone', 'gender', 'birth_date', 'user_id']
     autocomplete_fields = ['user_id']
-    list_display = ['id', 'phone', 'birth_date', 'user_id']
+    list_display = ['id', 'user_name', 'phone', 'birth_date', 'user_id']
+
+    def user_name(self, obj):
+        return obj.user.username
 
 
 
