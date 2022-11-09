@@ -1,7 +1,7 @@
 from django.contrib import admin
 
 # Register your models here.
-from healthcare.models import UserProfile, DoctorProfile
+from healthcare.models import UserProfile, DoctorProfile, Appointment
 from django.contrib.auth.models import User
 from django.contrib.auth.admin import UserAdmin as AuthUserAdmin
 
@@ -41,7 +41,18 @@ class DoctorProfileAdmin(admin.ModelAdmin):
     def user_id(self, obj):
         return obj.user.id
 
+class AppointmentAdmin(admin.ModelAdmin):
+    model = Appointment
+    list_display = ['id', 'created_at', 'status', 'user_id', 'doctor_id']
+
+    def doctor_name(self, obj):
+        return obj.user.username
+    
+    def user_id(self, obj):
+        return obj.user.id
+
 admin.site.unregister(User)
 admin.site.register(DoctorProfile, DoctorProfileAdmin)
 admin.site.register(UserProfile, UserProfileAdmin)
+admin.site.register(Appointment, AppointmentAdmin)
 admin.site.register(User, AccountsUserAdmin)

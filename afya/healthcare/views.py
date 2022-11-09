@@ -20,7 +20,10 @@ def registerView(request):
             return render(request, 'healthcare/finish.html')
     else:
         form = UserRegistrationForm()
-    return render(request, 'healthcare/register.html', {'form': form})
+    return render(request, 'registration/register.html', {'form': form})
 
 def finishView(request):
     return render(request, 'healthcare/finish.html')
+
+def dashBoardView(request):
+    return render(request, 'healthcare/dashboard.html')

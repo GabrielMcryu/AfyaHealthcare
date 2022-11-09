@@ -7,11 +7,14 @@
     <title>Document</title>
 </head>
 <body>
-    <h1>Register</h1>
-    <form method="post">
+    {% block title %}Login{% endblock  %}
+    {% block content %}
+    <form method='POST'>
         {% csrf_token %}
         {{form}}
-        <input type="submit" value="Register">
+        <p>Don't have an account? Create one <a href="/register">Here</a></p>
+        <button type='submit'>Login</button>
     </form>
+    {% endblock  %}
 </body>
 </html>

@@ -55,7 +55,19 @@ class DoctorProfile(models.Model):
     biography = models.TextField(null=True)
 
 class Appointment(models.Model):
+    STATUS_PENDING = 'Pending'
+    STATUS_APPROVED = 'Approved'
+    STATUS_REJECTED = 'Rejected'
+
+    STATUS_CHOICES = [
+        (STATUS_PENDING, 'Pending'),
+        (STATUS_APPROVED, 'Approved'),
+        (STATUS_REJECTED, 'Rejected'),
+    ]
+
     created_at = models.DateTimeField(auto_now_add=True)
     symptoms = models.TextField(null=True)
+    appontment_date = models.DateField(null=True)
+    status = models.CharField(max_length=255, choices=STATUS_CHOICES, default=STATUS_PENDING)
     doctor_id = models.ForeignKey(DoctorProfile, on_delete=models.CASCADE)
-    user_id = models.ForeignKey(UserProfile, on_delete=models.CASCADE)
+    user_id = models.ForeignKey(User, on_delete=models.CASCADE)
