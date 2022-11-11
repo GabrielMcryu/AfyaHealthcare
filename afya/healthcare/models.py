@@ -16,6 +16,21 @@ class UserProfile(models.Model):
     gender = models.CharField(max_length=1, choices=GENDER_CHOICES, default=Gender_MALE)
     birth_date = models.DateField(null=True)
 
+
+class Region(models.Model):
+    COUNTY_NAIROBI = 'Nairobi'
+    COUNTY_MOMBASA = 'Mombasa'
+
+    COUNTY_CHOICES = [
+        (COUNTY_NAIROBI, 'Nairobi'),
+        (COUNTY_MOMBASA, 'Mombasa'),
+    ]
+
+    county = models.CharField(max_length=255, choices=COUNTY_CHOICES, null=True)
+
+    def __str__(self):
+        return self.county
+
 class DoctorProfile(models.Model):
     S_DERMATOLOGY = 'Dermatology'
     S_FAMILY_MEDICINE = 'Family Medicine'
@@ -41,17 +56,9 @@ class DoctorProfile(models.Model):
         (S_PUBLIC_HEALTH, 'Public Health'),
     ]
 
-    COUNTY_NAIROBI = 'Nairobi'
-    COUNTY_MOMBASA = 'Mombasa'
-
-    COUNTY_CHOICES = [
-        (COUNTY_NAIROBI, 'Nairobi'),
-        (COUNTY_MOMBASA, 'Mombasa'),
-    ]
-
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     specialization = models.CharField(max_length=50,choices=SPECIALIZATION_CHOICES , null=True)
-    county = models.CharField(max_length=255, choices=COUNTY_CHOICES, null=True)
+    county = models.ForeignKey(Region, on_delete=models.CASCADE)
     biography = models.TextField(null=True)
 
 class Appointment(models.Model):
@@ -71,3 +78,4 @@ class Appointment(models.Model):
     status = models.CharField(max_length=255, choices=STATUS_CHOICES, default=STATUS_PENDING)
     doctor_id = models.ForeignKey(DoctorProfile, on_delete=models.CASCADE)
     user_id = models.ForeignKey(User, on_delete=models.CASCADE)
+
