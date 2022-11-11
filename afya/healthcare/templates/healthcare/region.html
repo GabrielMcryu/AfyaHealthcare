@@ -1,0 +1,11 @@
+<h1>Region</h1>
+{% block content %}
+
+<ul>
+    {% for region in all_regions %}
+    <li>{{region.id}}: {{region.county}} <a href="{% url 'healthcare:all_doctors_view' region.id %}">link</a></li>
+    {% endfor %}
+</ul>
+
+
+{% endblock %}

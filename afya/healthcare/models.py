@@ -11,7 +11,7 @@ class UserProfile(models.Model):
         (GENDER_FEMALE, 'Female'),
     ]
 
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='user_profile')
     phone = models.CharField('Phone', max_length=255)
     gender = models.CharField(max_length=1, choices=GENDER_CHOICES, default=Gender_MALE)
     birth_date = models.DateField(null=True)
@@ -56,7 +56,7 @@ class DoctorProfile(models.Model):
         (S_PUBLIC_HEALTH, 'Public Health'),
     ]
 
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='doctor_profiles')
     specialization = models.CharField(max_length=50,choices=SPECIALIZATION_CHOICES , null=True)
     county = models.ForeignKey(Region, on_delete=models.CASCADE)
     biography = models.TextField(null=True)
@@ -76,6 +76,6 @@ class Appointment(models.Model):
     symptoms = models.TextField(null=True)
     appontment_date = models.DateField(null=True)
     status = models.CharField(max_length=255, choices=STATUS_CHOICES, default=STATUS_PENDING)
-    doctor_id = models.ForeignKey(DoctorProfile, on_delete=models.CASCADE)
-    user_id = models.ForeignKey(User, on_delete=models.CASCADE)
+    doctor = models.ForeignKey(DoctorProfile, on_delete=models.CASCADE, related_name='doctor_info')
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name = 'user_info')
 
