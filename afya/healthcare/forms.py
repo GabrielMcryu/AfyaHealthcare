@@ -2,7 +2,7 @@ from django import forms
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 from django.contrib.auth.models import User
 from django.forms import ModelForm
-from .models import UserProfile
+from .models import UserProfile, DoctorProfile
 
 class UserRegistrationForm(UserCreationForm):
     GENDER_CHOICES = [
@@ -43,3 +43,24 @@ class UpdateUserProfileForm(ModelForm):
     class Meta:
         model = UserProfile
         fields = ['phone', 'gender', 'birth_date']
+
+class UpdateDoctorProfileForm(ModelForm):
+    SPECIALIZATION_CHOICES = [
+        ('Dermatology', 'Dermatology'),
+        ('Family Medicine', 'Family Medicine'),
+        ('Internal Medicine', 'Internal Medicine'),
+        ('Neurosurgery', 'Neurosurgery'),
+        ('Gynaecology', 'Gynaecology'),
+        ('Oncology', 'Oncology'),
+        ('Paediatrics', 'Paediatrics'),
+        ('Psychiatry', 'Psychiatry'),
+        ('Urology', 'Urology'),
+        ('Public Health', 'Public Health'),
+    ]
+
+    specialization = forms.CharField(label='Choose Specialization', widget=forms.Select(choices=SPECIALIZATION_CHOICES), required=True)
+    biography = forms.Textarea()
+
+    class Meta:
+        model = DoctorProfile
+        fields = ['specialization', 'county', 'biography']
