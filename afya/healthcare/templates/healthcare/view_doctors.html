@@ -3,7 +3,7 @@
 
 <ul>
     {% for doctor in doctor_list.all %}
-    <li>Id: {{doctor.id}}, Name: {{doctor.user.first_name}} {{doctor.user.last_name}}, Specialization: {{doctor.specialization}} <a href="#">Link</a></li>
+    <li>Id: {{doctor.id}}, Name: {{doctor.user.first_name}} {{doctor.user.last_name}}, Specialization: {{doctor.specialization}} <a href="{% url 'healthcare:doctor' doctor.id %}">Link</a></li>
     {% endfor %}
 
 </ul>

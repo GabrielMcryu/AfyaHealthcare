@@ -3,8 +3,8 @@ from django.contrib.auth.models import User
 
 # Create your models here.
 class UserProfile(models.Model):
-    Gender_MALE = 'M'
-    GENDER_FEMALE = 'F'
+    Gender_MALE = 'Male'
+    GENDER_FEMALE = 'Female'
 
     GENDER_CHOICES = [
         (Gender_MALE, 'Male'),
@@ -13,7 +13,7 @@ class UserProfile(models.Model):
 
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='user_profile')
     phone = models.CharField('Phone', max_length=255)
-    gender = models.CharField(max_length=1, choices=GENDER_CHOICES, default=Gender_MALE)
+    gender = models.CharField(max_length=10, choices=GENDER_CHOICES, default=Gender_MALE)
     birth_date = models.DateField(null=True)
 
 
