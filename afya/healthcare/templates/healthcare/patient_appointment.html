@@ -1,0 +1,18 @@
+{% extends 'healthcare/base.html' %}
+{% block title %}Appointment{% endblock %}
+{% block content %}
+
+<h1>Appointment</h1>
+<p>Name: {{appointment_data.user.user.first_name}} {{appointment_data.user.user.last_name}}</p>
+<p>Phone Number: {{appointment_data.user.phone}}</p>
+<p>Email: {{appointment_data.user.user.email}}</p>
+<p>Gender: {{appointment_data.user.gender}}</p>
+<p>Birth date: {{appointment_data.user.birth_date}}</p>
+<p>Appointment Status: {{appointment_data.status}}</p>
+{% if appointment_data.status == 'Approved' %}
+<p>Date: {{appointment_data.appointment_date}}</p>
+{% endif %}
+<p>Symptoms:</p>
+<p>{{appointment_data.symptoms}}</p>
+<a href="{{request.META.HTTP_REFERER}}">Go back</a>
+{% endblock %}

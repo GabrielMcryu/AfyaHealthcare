@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from datetime import datetime
 
 # Create your models here.
 class UserProfile(models.Model):
@@ -15,6 +16,9 @@ class UserProfile(models.Model):
     phone = models.CharField('Phone', max_length=255)
     gender = models.CharField(max_length=10, choices=GENDER_CHOICES, default=Gender_MALE)
     birth_date = models.DateField(null=True)
+
+    def __str__(self):
+        return self.user.first_name
 
 
 class Region(models.Model):
@@ -61,21 +65,31 @@ class DoctorProfile(models.Model):
     county = models.ForeignKey(Region, on_delete=models.CASCADE)
     biography = models.TextField(null=True)
 
+    def __str__(self):
+        return self.user.first_name
+
 class Appointment(models.Model):
     STATUS_PENDING = 'Pending'
     STATUS_APPROVED = 'Approved'
     STATUS_REJECTED = 'Rejected'
+    STATUS_COMPLETED = 'Completed'
+    STATUS_CANCELLED = 'Cancelled'
 
     STATUS_CHOICES = [
         (STATUS_PENDING, 'Pending'),
         (STATUS_APPROVED, 'Approved'),
         (STATUS_REJECTED, 'Rejected'),
+        (STATUS_COMPLETED, 'Completed'),
+        (STATUS_CANCELLED, 'Cancelled'),
     ]
 
     created_at = models.DateTimeField(auto_now_add=True)
     symptoms = models.TextField(null=True)
-    appontment_date = models.DateField(null=True)
+    appointment_date = models.DateField(null=True)
     status = models.CharField(max_length=255, choices=STATUS_CHOICES, default=STATUS_PENDING)
     doctor = models.ForeignKey(DoctorProfile, on_delete=models.CASCADE, related_name='doctor_info')
-    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name = 'user_info')
+    user = models.ForeignKey(UserProfile, on_delete=models.CASCADE, related_name = 'user_info')
+
+    def __str__(self):
+        return f'Appointment {self.created_at}'
 

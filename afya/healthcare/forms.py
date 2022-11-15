@@ -2,7 +2,7 @@ from django import forms
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 from django.contrib.auth.models import User
 from django.forms import ModelForm
-from .models import UserProfile, DoctorProfile
+from .models import UserProfile, DoctorProfile, Appointment
 
 class UserRegistrationForm(UserCreationForm):
     GENDER_CHOICES = [
@@ -64,3 +64,57 @@ class UpdateDoctorProfileForm(ModelForm):
     class Meta:
         model = DoctorProfile
         fields = ['specialization', 'county', 'biography']
+
+class BookAppointmentForm(ModelForm):
+    symptoms = forms.Textarea()
+
+    class Meta:
+        model = Appointment
+        fields = ['symptoms']
+
+class ApproveAppointmentForm(ModelForm):
+    STATUS_CHOICE = [
+        ('Approved', 'Approved'),
+    ]
+    YEARS= [x for x in range(2022,2040)]
+
+
+    appointment_date = forms.DateField(label='Enter Date', widget=forms.SelectDateWidget(years=YEARS),required=True)
+    status = forms.CharField(label='Status', widget=forms.Select(choices=STATUS_CHOICE), required=True)
+    
+    class Meta:
+        model = Appointment
+        fields = ['appointment_date', 'status']
+
+class RejectAppointmentForm(ModelForm):
+    STATUS_CHOICE = [
+        ('Rejected', 'Rejected')
+    ]
+
+    status = forms.CharField(label='Status', widget=forms.Select(choices=STATUS_CHOICE), required=True)
+
+    class Meta:
+        model = Appointment
+        fields = ['status']
+
+class CompleteAppointmentForm(ModelForm):
+    STATUS_CHOICE = [
+        ('Completed', 'Completed')
+    ]
+
+    status = forms.CharField(label='Status', widget=forms.Select(choices=STATUS_CHOICE), required=True)
+
+    class Meta:
+        model = Appointment
+        fields = ['status']
+
+class CancelAppointmentForm(ModelForm):
+    STATUS_CHOICE = [
+        ('Cancelled', 'Cancelled')
+    ]
+
+    status = forms.CharField(label='Status', widget=forms.Select(choices=STATUS_CHOICE), required=True)
+
+    class Meta:
+        model = Appointment
+        fields = ['status']

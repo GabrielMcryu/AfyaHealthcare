@@ -47,10 +47,13 @@ class DoctorProfileAdmin(admin.ModelAdmin):
 
 class AppointmentAdmin(admin.ModelAdmin):
     model = Appointment
-    list_display = ['id', 'created_at', 'status', 'user_id', 'doctor_id']
+    list_display = ['id', 'created_at', 'status', 'user_id', 'patient_name','doctor_id', 'doctor_name']
 
     def doctor_name(self, obj):
-        return obj.user.username
+        return obj.doctor.user.first_name
+
+    def patient_name(self, obj):
+        return obj.user.user.first_name
     
     def user_id(self, obj):
         return obj.user.id

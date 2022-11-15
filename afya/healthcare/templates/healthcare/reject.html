@@ -1,10 +1,10 @@
 {% extends 'healthcare/base.html' %}
-{% block title %}Complete{% endblock %}
+{% block title %}Reject{% endblock %}
 {% block content %}
-<h1>Complete Appointment</h1>
+<h1>Reject Appointment</h1>
 <form method="post">
     {% csrf_token %}
     {{form}}
-    <input type="submit" value="Complete">
+    <input type="submit" value="Reject">
 </form>
 {% endblock %}

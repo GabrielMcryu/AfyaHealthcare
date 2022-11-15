@@ -7,8 +7,12 @@
 <p><a href="{% url 'healthcare:patient_appointments' %}">View Patient Appointments</a></p>
 <p><a href="{% url 'healthcare:user_profile' %}">Update Profile</a></p>
 <p><a href="{% url 'healthcare:doctor_profile' %}">Update Doctor Profile</a></p>
+<p><a href="{% url 'healthcare:region' %}">Book An Appointment</a></p>
+<p><a href="{% url 'healthcare:view_appointments' %}">View Appointments</a></p>
 {% else %}
+<p><a href="{% url 'healthcare:region' %}">Book An Appointment</a></p>
 <p><a href="{% url 'healthcare:user_profile' %}">Update Profile</a></p>
+<p><a href="{% url 'healthcare:view_appointments' %}">View Appointments</a></p>
 {% endif %}
 
 
