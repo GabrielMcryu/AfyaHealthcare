@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required, permission_required
 from .forms import *
 from .models import UserProfile, Region, DoctorProfile, Appointment
+from .emails import sendEmail
 
 # Create your views here.
 def registerView(request):
@@ -26,9 +27,6 @@ def registerView(request):
 def indexView(request):
     return render(request, 'healthcare/index.html')
 
-def finishView(request):
-    return render(request, 'healthcare/finish.html')
-
 @login_required(login_url='/login')
 def dashBoardView(request):
     return render(request, 'healthcare/dashboard.html')
@@ -36,7 +34,11 @@ def dashBoardView(request):
 @login_required(login_url='/login')
 def regionView(request):
     all_regions = Region.objects.all()
-    context = {'all_regions': all_regions}
+    my_data = [1, 2, 3]
+    context = {
+        'all_regions': all_regions,
+        'my_data': my_data,
+        }
 
     return render(request, 'healthcare/region.html', context=context)
 
@@ -148,10 +150,22 @@ def patientAppointmentView(request, id):
 @login_required(login_url='/login')
 @permission_required('healthcare.view_region', raise_exception=True)
 def approveAppointment(request, id):
+    email_header = 'Your appointment has been approved!'
     appointment_data = Appointment.objects.get(id=id)
+    user_email = appointment_data.user.user.email
+    doctor_data = {}
+    doctor_first_name = appointment_data.doctor.user.first_name
+    doctor_last_name = appointment_data.doctor.user.last_name
+    doctor_specialization = appointment_data.doctor.specialization
+    symptoms = appointment_data.symptoms
+    doctor_data['first_name'] = doctor_first_name
+    doctor_data['last_name'] = doctor_last_name
+    doctor_data['specialization'] = doctor_specialization
     form = ApproveAppointmentForm(request.POST or None, instance=appointment_data)
     if form.is_valid():
+        date = form.cleaned_data.get('appointment_date')
         form.save()
+        sendEmail(user_email, email_header, doctor_data, symptoms, date)
         return redirect('/dashboard/')
     context = {'form': form}
     return render(request, 'healthcare/approve.html', context=context)

@@ -19,5 +19,12 @@
     </table>
 </ul>
 
-
+{{ my_data|json_script:"my_data" }}
+<script>
+    const mydata = JSON.parse(document.getElementById('my_data').textContent);
+    console.log(mydata)
+    for (data in mydata) {
+        console.log(data)
+    }
+</script>
 {% endblock %}
