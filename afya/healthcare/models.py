@@ -64,6 +64,7 @@ class DoctorProfile(models.Model):
     specialization = models.CharField(max_length=50,choices=SPECIALIZATION_CHOICES , null=True)
     county = models.ForeignKey(Region, on_delete=models.CASCADE)
     biography = models.TextField(null=True)
+    has_schedule = models.BooleanField(default=False)
 
     def __str__(self):
         return self.user.first_name
@@ -92,4 +93,20 @@ class Appointment(models.Model):
 
     def __str__(self):
         return f'Appointment {self.created_at}'
+
+class Schedule(models.Model):
+    AVAILABILITY_CHOICES = [
+        ('Available', 'Available'),
+        ('Unavailable', 'Unavailable'),
+    ]
+
+    doctor = models.OneToOneField(DoctorProfile, on_delete=models.CASCADE)
+    monday = models.CharField(max_length=255, choices=AVAILABILITY_CHOICES)
+    tuesday = models.CharField(max_length=255, choices=AVAILABILITY_CHOICES)
+    wednesday = models.CharField(max_length=255, choices=AVAILABILITY_CHOICES)
+    thursday = models.CharField(max_length=255, choices=AVAILABILITY_CHOICES)
+    friday = models.CharField(max_length=255, choices=AVAILABILITY_CHOICES)
+    saturday = models.CharField(max_length=255, choices=AVAILABILITY_CHOICES)
+    sunday = models.CharField(max_length=255, choices=AVAILABILITY_CHOICES)
+
 

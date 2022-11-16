@@ -1,7 +1,7 @@
 from django.contrib import admin
 
 # Register your models here.
-from healthcare.models import UserProfile, DoctorProfile, Appointment, Region
+from healthcare.models import UserProfile, DoctorProfile, Appointment, Region, Schedule
 from django.contrib.auth.models import User
 from django.contrib.auth.admin import UserAdmin as AuthUserAdmin
 
@@ -34,7 +34,7 @@ class UserProfileAdmin(admin.ModelAdmin):
 class DoctorProfileAdmin(admin.ModelAdmin):
     model = DoctorProfile
     # fields = ['id', ]
-    list_display = ['id', 'doctor_name', 'specialization', 'region_name', 'biography']
+    list_display = ['id', 'doctor_name', 'specialization', 'region_name', 'biography', 'has_schedule']
 
     def doctor_name(self, obj):
         return obj.user.username
@@ -62,9 +62,14 @@ class RegionAdmin(admin.ModelAdmin):
     model = Region
     list_display = ['id', 'county']
 
+class ScheduleAdmin(admin.ModelAdmin):
+    model = Region
+    list_display = ['id', 'doctor']
+
 admin.site.unregister(User)
 admin.site.register(DoctorProfile, DoctorProfileAdmin)
 admin.site.register(UserProfile, UserProfileAdmin)
 admin.site.register(Appointment, AppointmentAdmin)
 admin.site.register(Region, RegionAdmin)
+admin.site.register(Schedule, ScheduleAdmin)
 admin.site.register(User, AccountsUserAdmin)
