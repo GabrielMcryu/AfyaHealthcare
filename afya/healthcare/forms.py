@@ -11,14 +11,20 @@ class UserRegistrationForm(UserCreationForm):
     ]
 
     YEARS= [x for x in range(1940,2021)]
+    # years=YEARS
 
     email = forms.EmailField(required=True)
     phone = forms.CharField(required=True)
     gender = forms.CharField(label='Choose your Gender', widget=forms.Select(choices=GENDER_CHOICES), required=True)
-    birth_date = forms.DateField(label='What is your birth date', widget=forms.SelectDateWidget(years=YEARS), required=True)
+    # birth_date = forms.DateField(label='What is your birth date', widget=forms.SelectDateWidget(attrs={'class':'birth_date'}), required=True)
+    birth_date = forms.CharField(widget=forms.TextInput(attrs={'class':'birth_date',}), required=True)
     class Meta:
         model = User
         fields = ['username', 'first_name', 'last_name', 'email', 'password1', 'password2', 'phone', 'gender', 'birth_date']
+
+    # def __init__(self, *args, **kwargs):
+    #     super().__init__(*args, **kwargs)
+    #     self.fields['birth_date'].widget.attrs.update({'id': 'birth_date'})
 
 class UpdateUserForm(UserChangeForm):
 
@@ -38,7 +44,7 @@ class UpdateUserProfileForm(ModelForm):
 
     phone = forms.CharField(required=True)
     gender = forms.CharField(label='Choose your Gender', widget=forms.Select(choices=GENDER_CHOICES), required=True)
-    birth_date = forms.DateField(label='What is your birth date', widget=forms.SelectDateWidget(years=YEARS), required=True)
+    birth_date = forms.CharField(widget=forms.TextInput(attrs={'class':'birth_date',}), required=True)
 
     class Meta:
         model = UserProfile
@@ -66,11 +72,12 @@ class UpdateDoctorProfileForm(ModelForm):
         fields = ['specialization', 'county', 'biography']
 
 class BookAppointmentForm(ModelForm):
+    appointment_date = forms.CharField(widget=forms.TextInput(attrs={'id':'appointment_date',}), required=True)
     symptoms = forms.Textarea()
 
     class Meta:
         model = Appointment
-        fields = ['symptoms']
+        fields = ['appointment_date', 'symptoms']
 
 class ApproveAppointmentForm(ModelForm):
     STATUS_CHOICE = [
@@ -78,13 +85,11 @@ class ApproveAppointmentForm(ModelForm):
     ]
     YEARS= [x for x in range(2022,2040)]
 
-
-    appointment_date = forms.DateField(label='Enter Date', widget=forms.SelectDateWidget(years=YEARS),required=True)
     status = forms.CharField(label='Status', widget=forms.Select(choices=STATUS_CHOICE), required=True)
     
     class Meta:
         model = Appointment
-        fields = ['appointment_date', 'status']
+        fields = ['status']
 
 class RejectAppointmentForm(ModelForm):
     STATUS_CHOICE = [

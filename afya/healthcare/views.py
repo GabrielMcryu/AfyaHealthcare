@@ -4,6 +4,7 @@ from django.contrib.auth.decorators import login_required, permission_required
 from .forms import *
 from .models import UserProfile, Region, DoctorProfile, Appointment, Schedule
 from .emails import sendEmail
+from .myfunctions import appointment_availability
 
 # Create your views here.
 def registerView(request):
@@ -19,7 +20,7 @@ def registerView(request):
             user = User.objects.get(username=username)
             user_data = UserProfile.objects.create(user=user, phone=phone, gender=gender, birth_date=birth_date)
             user_data.save()
-            return render(request, 'healthcare/dashboard.html')
+            return render(request, 'healthcare/index.html')
     else:
         form = UserRegistrationForm()
     return render(request, 'registration/register.html', {'form': form})
@@ -97,19 +98,30 @@ def updateDoctorProfileView(request):
 
 @login_required(login_url='\login')
 def bookAppointmentView(request, id):
+    schedule_data = {}
     doctor_id = id
     user_data = request.user
     user = UserProfile.objects.get(user=user_data)
     doctor = DoctorProfile.objects.get(id=doctor_id)
     form = BookAppointmentForm(request.POST)
     if form.is_valid():
+        appointment_date = form.cleaned_data.get('appointment_date')
         symptoms = form.cleaned_data.get('symptoms')
-        appointment_data = Appointment.objects.create(symptoms=symptoms, user=user, doctor=doctor)
+        appointment_data = Appointment.objects.create(appointment_date=appointment_date, symptoms=symptoms, user=user, doctor=doctor)
         appointment_data.save()
         return render(request, 'healthcare/dashboard.html')
     else:
         form = BookAppointmentForm()
-    context = {'form': form}
+    doctor_schedule = Schedule.objects.get(doctor=doctor)
+    schedule_data['monday'] = doctor_schedule.monday
+    schedule_data['tuesday'] = doctor_schedule.tuesday
+    schedule_data['wednesday'] = doctor_schedule.wednesday
+    schedule_data['thursday'] = doctor_schedule.thursday
+    schedule_data['friday'] = doctor_schedule.friday
+    schedule_data['saturday'] = doctor_schedule.saturday
+    schedule_data['sunday'] = doctor_schedule.sunday
+    filtered_schedule = appointment_availability(schedule_data)
+    context = {'form': form, 'filtered_schedule': filtered_schedule}
     return render(request, 'healthcare/book_appointment.html', context=context)
 
 @login_required(login_url='\login')
