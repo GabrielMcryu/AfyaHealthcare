@@ -4,16 +4,20 @@
 
 <h1>Dashboard</h1>
 {% if perms.healthcare.view_region %}
+<h2>Doctor Links</h2>
 <p><a href="{% url 'healthcare:patient_appointments' %}">View Patient Appointments</a></p>
-<p><a href="{% url 'healthcare:user_profile' %}">Update Profile</a></p>
 <p><a href="{% url 'healthcare:doctor_profile' %}">Update Doctor Profile</a></p>
-<p><a href="{% url 'healthcare:region' %}">Book An Appointment</a></p>
-<p><a href="{% url 'healthcare:view_appointments' %}">View Appointments</a></p>
+{% if not doctor_data.has_schedule %}
+<p><a href="{% url 'healthcare:create_schedule' %}">Create your schedule</a></p>
 {% else %}
+<p><a href="{% url 'healthcare:update_schedule' %}">Update your schedule</a></p>
+{% endif %}
+{% endif %}
+<h2>User Links</h2>
 <p><a href="{% url 'healthcare:region' %}">Book An Appointment</a></p>
 <p><a href="{% url 'healthcare:user_profile' %}">Update Profile</a></p>
 <p><a href="{% url 'healthcare:view_appointments' %}">View Appointments</a></p>
-{% endif %}
+
 
 
 

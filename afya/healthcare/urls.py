@@ -21,4 +21,6 @@ urlpatterns = [
     path('reject/<int:id>',views.rejectAppointment, name='reject'),
     path('complete/<int:id>', views.completeAppointment, name='complete'),
     path('cancel/<int:id>', views.cancelAppointment, name='cancel'),
+    path('create_schedule/', views.createScheduleView, name='create_schedule'),
+    path('update_schedule/', views.updateScheduleView, name='update_schedule'),
 ]

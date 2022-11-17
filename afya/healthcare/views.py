@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required, permission_required
 from .forms import *
-from .models import UserProfile, Region, DoctorProfile, Appointment
+from .models import UserProfile, Region, DoctorProfile, Appointment, Schedule
 from .emails import sendEmail
 
 # Create your views here.
@@ -29,7 +29,14 @@ def indexView(request):
 
 @login_required(login_url='/login')
 def dashBoardView(request):
-    return render(request, 'healthcare/dashboard.html')
+    user_data = request.user
+    check_doctor = DoctorProfile.objects.filter(user=user_data).count()
+    if check_doctor > 0:
+        doctor_data = DoctorProfile.objects.get(user=user_data)
+        context = {'doctor_data': doctor_data}
+    else:
+        context = {}
+    return render(request, 'healthcare/dashboard.html', context=context)
 
 @login_required(login_url='/login')
 def regionView(request):
@@ -201,3 +208,40 @@ def cancelAppointment(request, id):
         return redirect('/dashboard/')
     context = {'form': form}
     return render(request, 'healthcare/cancel.html', context=context)
+
+@login_required(login_url='/login')
+@permission_required('healthcare.view_region', raise_exception=True)
+def createScheduleView(request):
+    user_data = request.user
+    doctor_data = DoctorProfile.objects.get(user=user_data)
+    if request.method == 'POST':
+        form = CreateScheduleForm(request.POST)
+        if form.is_valid():
+            monday = form.cleaned_data.get('monday')
+            tuesday = form.cleaned_data.get('tuesday')
+            wednesday = form.cleaned_data.get('wednesday')
+            thursday = form.cleaned_data.get('thursday')
+            friday = form.cleaned_data.get('friday')
+            saturday = form.cleaned_data.get('saturday')
+            sunday = form.cleaned_data.get('sunday')
+            schedule_data = Schedule.objects.create(doctor=doctor_data, monday=monday, tuesday=tuesday, wednesday=wednesday, thursday=thursday, friday=friday, saturday=saturday, sunday=sunday)
+            schedule_data.save()
+            doctor_data.has_schedule = True
+            doctor_data.save()
+            return redirect('/dashboard/')
+    else:
+        form = CreateScheduleForm()
+    return render(request, 'healthcare/create_schedule.html', {'form': form})
+
+@login_required(login_url='/login')
+@permission_required('healthcare.view_region', raise_exception=True)
+def updateScheduleView(request):
+    user_data = request.user
+    doctor_data = DoctorProfile.objects.get(user=user_data)
+    schedule_data = Schedule.objects.get(doctor=doctor_data)
+    form = CreateScheduleForm(request.POST or None, instance=schedule_data)
+    if form.is_valid():
+        form.save()
+        return redirect('/dashboard/')
+    context = {'form': form}
+    return render(request, 'healthcare/update_schedule.html', context=context)

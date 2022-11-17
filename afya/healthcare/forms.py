@@ -2,7 +2,7 @@ from django import forms
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 from django.contrib.auth.models import User
 from django.forms import ModelForm
-from .models import UserProfile, DoctorProfile, Appointment
+from .models import UserProfile, DoctorProfile, Appointment, Schedule
 
 class UserRegistrationForm(UserCreationForm):
     GENDER_CHOICES = [
@@ -118,3 +118,21 @@ class CancelAppointmentForm(ModelForm):
     class Meta:
         model = Appointment
         fields = ['status']
+
+class CreateScheduleForm(ModelForm):
+    STATUS_CHOICE = [
+        ('Available', 'Available'),
+        ('Unavailable', 'Unavailable'),
+    ]
+
+    monday = forms.CharField(label='Monday', widget=forms.Select(choices=STATUS_CHOICE), required=True)
+    tuesday = forms.CharField(label='Tuesday', widget=forms.Select(choices=STATUS_CHOICE), required=True)
+    wednesday = forms.CharField(label='Wednesday', widget=forms.Select(choices=STATUS_CHOICE), required=True)
+    thursday = forms.CharField(label='Thursday', widget=forms.Select(choices=STATUS_CHOICE), required=True)
+    friday = forms.CharField(label='Friday', widget=forms.Select(choices=STATUS_CHOICE), required=True)
+    saturday = forms.CharField(label='Saturday', widget=forms.Select(choices=STATUS_CHOICE), required=True)
+    sunday = forms.CharField(label='Sunday', widget=forms.Select(choices=STATUS_CHOICE), required=True)
+
+    class Meta:
+        model = Schedule
+        fields = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday']
