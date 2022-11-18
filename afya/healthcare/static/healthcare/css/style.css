@@ -1,0 +1,390 @@
+/* GENERAL CSS */
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+  }
+  
+html {
+/* Percentage of user's browser font size settings */
+font-size: 62.5%;
+overflow-x: hidden;
+
+/* Does not work on Safari */
+scroll-behavior: smooth;
+}
+  
+body {
+    font-family: 'Roboto', sans-serif;
+    line-height: 1;
+    font-weight: 400;
+    color: #555;
+
+    /* overflow: hidden; */
+}
+
+.container {
+    max-width: 120rem;
+    padding: 0 3.2rem;
+    margin: 0 auto;
+}
+
+
+
+/* STYLES */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #fff;
+
+    height: 9.6rem;
+    padding: 0 4.8rem;
+    position: relative;
+    box-shadow: 0 1.2rem 3.2rem rgba(0, 0, 0, 0.03);
+}
+
+.logo {
+    height: 12.8rem;
+}
+
+.main-nav-list {
+    list-style: none;
+    display: flex;
+    align-items: center;
+    gap: 3.2rem;
+}
+
+.main-nav-link:link,
+.main-nav-link:visited {
+  display: inline-block;
+  text-decoration: none;
+  color: #333;
+  font-weight: 500;
+  font-size: 1.8rem;
+  transition: all 0.3s;
+}
+
+.section-main {
+    height: 85vh;
+    background-image:linear-gradient(0deg,rgba(24,100,171, 0.3), rgba(24,100,171, 0.3)), url("img/main.jpg");
+    background-repeat:no-repeat;
+    background-size:cover;
+}
+
+.container-head {
+    /* 1140px */
+    max-width: 120rem;
+    padding: 0 3.2rem;
+    margin: 0 auto;
+}
+
+.heading {
+    font-weight: 700;
+    color: #fff;
+    letter-spacing: -0.5px;
+    font-size: 9.6rem;
+    line-height: 1.05;
+    margin-bottom: 1.2rem;
+    padding-top: 12.8rem;
+    text-align: center;
+}
+
+.subheading {
+    display: block;
+    font-size: 3.2rem;
+    font-weight: 500;
+    color: #fff;
+    text-transform: uppercase;
+    margin-bottom: 2.4rem;
+    letter-spacing: 0.75px;
+    text-align: center;
+}
+
+.buttons {
+    display: flex;
+    justify-content: center;
+    gap: 1.6rem;
+}
+
+.btn,
+.btn:link,
+.btn:visited {
+  display: inline-block;
+
+  text-decoration: none;
+  font-size: 2rem;
+  color: #228be6;
+  font-weight: 600;
+  padding: 1.6rem 3.2rem;
+  border-radius: 9px;
+
+  /* Only necessary for .btn */
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+
+  /* Put transition on original "state" */
+  transition: all 0.3s;
+}
+
+.btn--landing,
+.btn--landing:link,
+.btn--landing:visited {
+    background-color: #fff;
+}
+
+.footer {
+    padding: 2.4rem;
+    border-top: 1px solid #eee;
+}
+
+.copyright {
+    font-size: 1.4rem;
+    line-height: 1.6;
+    color: #767676;
+    margin-top: auto;
+}
+
+.section--form {
+    min-height: 85vh;
+}
+
+.form--container {
+    max-width: 120rem;
+    padding: 0 3.2rem;
+    margin: 0 auto;
+}
+
+.page--header {
+    text-align: center;
+    font-size: 3.6rem;
+    color: #228be6;
+    padding: 2.4rem 0;
+}
+
+.form--content {
+    display: block;
+	max-width: 60rem;
+	margin: 0 auto;
+	padding: 3.2rem;
+	border-radius: 10px;
+	background-color: #228be6;
+	margin-bottom: 4.8rem;
+}
+
+.form--content label {
+    display: block;
+    font-size: 1.6rem;
+    font-weight: 500;
+    margin-bottom: 1.2rem;
+    color: #fff;
+}
+
+.input-field{
+	width: 100%;
+	padding: 0.8rem;
+	background-color: #fff;
+	border-radius: 5px;
+	font-size: 1.6rem;
+    border: 1px solid #e7f5ff;
+    margin-bottom: 1.2rem;
+}
+
+
+.submit-btn{
+	margin-top: 10px;
+	width: 100%;
+	padding-top: 10px;
+	padding-bottom:10px; 
+	color: #228be6;
+	background-color: #fff;
+	border:none;
+    font-size: 1.8rem;
+    font-weight: 700;
+}
+
+.page--section {
+    min-height: 85vh;
+    padding-bottom: 6.4rem;
+}
+
+.dashboard--grid {
+    padding-top: 4.8rem;
+    display: grid;
+    row-gap: 6.4rem;
+    column-gap: 6.4rem;
+    grid-template-columns: repeat(3, 1fr);
+}
+
+.dash {
+    box-shadow: 0 2.4rem 4.8rem rgba(0, 0, 0, 0.1);
+}
+
+.dashboard--img {
+    width: 100%;
+}
+
+.dash-btn {
+    text-align: center;
+}
+
+/* Table  */
+.table {
+    padding: 3.2rem 9.6rem;
+}
+
+.t--style {
+    width: 100%;
+    border-collapse: collapse;
+    box-shadow: 0 2.4rem 4.8rem rgba(0, 0, 0, 0.1);
+}
+
+.t--style th{
+    padding: 1.8rem;
+}
+
+.t--style td {
+    padding: 1.8rem;
+}
+
+.t--style th {
+    text-align: left;
+    font-size: 1.8rem;
+    background-color: #339af0;
+    color: #fff;
+}
+
+.table--titles {
+    font-size: 2.4rem;
+    padding: 2.4rem 0;
+    color: #4dabf7;
+}
+
+.td-normal {
+    text-align: left;
+    font-size: 1.2rem;
+}
+
+.link-align {
+    text-align: center;
+}
+
+.btn--full,
+.btn--full:link,
+.btn--full:visited {
+    display: inline-block;
+
+    text-decoration: none;
+    font-size: 1.2rem;
+    background-color: #228be6;
+    color: #fff;
+    font-weight: 600;
+    padding: 1.6rem 3.2rem;
+    border-radius: 9px;
+
+    /* Only necessary for .btn */
+    border: none;
+    cursor: pointer;
+    font-family: inherit;
+
+    /* Put transition on original "state" */
+    transition: all 0.3s;
+}
+
+.btn--cancel,
+.btn--cancel:link,
+.btn--cancel:visited {
+    display: inline-block;
+
+    text-decoration: none;
+    font-size: 1.2rem;
+    background-color: #f03e3e;
+    color: #fff;
+    font-weight: 600;
+    padding: 1.6rem 3.2rem;
+    border-radius: 9px;
+
+    /* Only necessary for .btn */
+    border: none;
+    cursor: pointer;
+    font-family: inherit;
+
+    /* Put transition on original "state" */
+    transition: all 0.3s;
+}
+
+.btn--confirm,
+.btn--confirm:link,
+.btn--confirm:visited {
+    display: inline-block;
+
+    text-decoration: none;
+    font-size: 1.2rem;
+    background-color: #37b24d;
+    color: #fff;
+    font-weight: 600;
+    padding: 1.6rem 3.2rem;
+    border-radius: 9px;
+
+    /* Only necessary for .btn */
+    border: none;
+    cursor: pointer;
+    font-family: inherit;
+
+    /* Put transition on original "state" */
+    transition: all 0.3s;
+}
+
+
+.profile--container {
+    max-width: 60rem;
+    padding: 2.4rem 3.2rem;
+    margin: 0 auto;
+    box-shadow: 0 0 4.8rem rgba(0, 0, 0, 0.1);
+}
+
+.item--row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: left;
+    padding: 1.8rem 0;
+    font-size: 1.8rem;
+}
+
+
+.item--head, .item--bio {
+    display: grid;
+    grid-template-columns: 1fr;
+    align-items: left;
+    font-size: 1.8rem;
+}
+
+.item--head {
+    padding-top: 1.8rem;
+    /* padding-bottom: 0.2rem; */
+}
+
+.item--bio {
+    padding: 1.8rem 0 2.4rem 0;
+}
+
+.font--bold {
+    font-weight: 700;
+}
+
+.button--grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    padding: 1.8rem 0;
+}
+
+.button--grid--3 {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    padding: 1.8rem 0;
+}
+
+.item--button {
+    text-align: center;
+}

@@ -5,20 +5,42 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@500&family=Roboto:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet"> 
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'healthcare/css/style.css' %}">
     <title>{% block title %}My Site{% endblock %}</title>
 </head>
 <body>
-    <nav>
+    <header class="header">
+        <a href="#">
+            <img src="{% static 'healthcare/images/afya-r.png' %}" alt="Afya logo" class="logo" />
+        </a>
+        <nav>
+            <ul class="main-nav-list">
+                {% if user.is_authenticated %}
+                <li><a class="main-nav-link" href="{% url 'healthcare:dashboard' %}">Dashboard</a></li>
+                <li><a class="main-nav-link" href="#">Logged in as {{user.username}}</a></li>
+                <li><a class="main-nav-link" href="/logout">Logout</a></li>
+                {% else %}
+                <li><a class="main-nav-link" href="/login">Login</a></li>
+                <li><a class="main-nav-link" href="/register">Sign Up</a></li>
+                {% endif %}
+            </ul>
+        </nav>
+    </header>
+    {% comment %} <nav>
         <ul>
             {% if user.is_authenticated %}
-            <li><a href="{% url 'healthcare:dashboard' %}">Dashboard</a></li>
-            <li><a href="#">Logged in as {{user.username}}</a></li>
-            <li><a href="/logout">Logout</a></li>
+            <li><a class="main-nav-link" href="{% url 'healthcare:dashboard' %}">Dashboard</a></li>
+            <li><a class="main-nav-link" href="#">Logged in as {{user.username}}</a></li>
+            <li><a class="main-nav-link" href="/logout">Logout</a></li>
             {% else %}
-            <li><a href="/login">Login</a></li>
+            <li><a class="main-nav-link" href="/login">Login</a></li>
             {% endif %}
         </ul>     
-    </nav>
+    </nav> {% endcomment %}
     <section>{% block content %} {% endblock %}</section>
 </body>
 </html>
