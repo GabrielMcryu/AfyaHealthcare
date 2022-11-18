@@ -32,11 +32,19 @@ def indexView(request):
 def dashBoardView(request):
     user_data = request.user
     check_doctor = DoctorProfile.objects.filter(user=user_data).count()
+    check_application = DoctorApplication.objects.filter(user=user_data).count()
     if check_doctor > 0:
         doctor_data = DoctorProfile.objects.get(user=user_data)
-        context = {'doctor_data': doctor_data}
+        context = {
+            'doctor_data': doctor_data,
+            'check_application': check_application,
+            'check_doctor': check_doctor,
+        }
     else:
-        context = {}
+        context = {
+            'check_application': check_application,
+            'check_doctor': check_doctor,
+        }
     return render(request, 'healthcare/dashboard.html', context=context)
 
 @login_required(login_url='/login')
@@ -257,3 +265,19 @@ def updateScheduleView(request):
         return redirect('/dashboard/')
     context = {'form': form}
     return render(request, 'healthcare/update_schedule.html', context=context)
+
+@login_required(login_url='/login')
+def doctorApplicationView(request):
+    user_data = request.user
+    if request.method == 'POST':
+        form = DoctorApplicationForm(request.POST)
+        if form.is_valid():
+            specialization = form.cleaned_data.get('specialization')
+            county = form.cleaned_data.get('county')
+            biography = form.cleaned_data.get('biography')
+            application_data = DoctorApplication.objects.create(user=user_data, specialization=specialization, county=county, biography=biography)
+            application_data.save()
+            return redirect('/dashboard/')
+    else:
+        form = DoctorApplicationForm()
+    return render(request, 'healthcare/careers.html', {'form': form})

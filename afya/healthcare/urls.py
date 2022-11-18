@@ -23,4 +23,5 @@ urlpatterns = [
     path('cancel/<int:id>', views.cancelAppointment, name='cancel'),
     path('create_schedule/', views.createScheduleView, name='create_schedule'),
     path('update_schedule/', views.updateScheduleView, name='update_schedule'),
+    path('careers/', views.doctorApplicationView, name='careers'),
 ]

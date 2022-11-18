@@ -1,7 +1,7 @@
 from django.contrib import admin
 
 # Register your models here.
-from healthcare.models import UserProfile, DoctorProfile, Appointment, Region, Schedule
+from healthcare.models import UserProfile, DoctorProfile, Appointment, Region, Schedule, DoctorApplication
 from django.contrib.auth.models import User
 from django.contrib.auth.admin import UserAdmin as AuthUserAdmin
 
@@ -66,10 +66,15 @@ class ScheduleAdmin(admin.ModelAdmin):
     model = Region
     list_display = ['id', 'doctor']
 
+class ApplicationAdmin(admin.ModelAdmin):
+    model = DoctorApplication
+    list_display = ['id', 'status']
+
 admin.site.unregister(User)
 admin.site.register(DoctorProfile, DoctorProfileAdmin)
 admin.site.register(UserProfile, UserProfileAdmin)
 admin.site.register(Appointment, AppointmentAdmin)
 admin.site.register(Region, RegionAdmin)
 admin.site.register(Schedule, ScheduleAdmin)
+admin.site.register(DoctorApplication, ApplicationAdmin)
 admin.site.register(User, AccountsUserAdmin)

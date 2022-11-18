@@ -17,6 +17,9 @@
 <p><a href="{% url 'healthcare:region' %}">Book An Appointment</a></p>
 <p><a href="{% url 'healthcare:user_profile' %}">Update Profile</a></p>
 <p><a href="{% url 'healthcare:view_appointments' %}">View Appointments</a></p>
+{% if check_doctor < 1 and check_application < 1 %}
+<p><a href="{% url 'healthcare:careers' %}">Apply as a Doctor</a></p>
+{% endif %}
 
 
 

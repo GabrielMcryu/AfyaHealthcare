@@ -1,0 +1,11 @@
+{% extends 'healthcare/base.html' %}
+{% block title %}Careers{% endblock %}
+{% block content %}
+<h1>Apply as a Doctor</h1>
+<form method="post">
+    {% csrf_token %}
+    {{form.as_p}}
+    <input type="submit" value="Submit">
+</form>
+
+{% endblock %}

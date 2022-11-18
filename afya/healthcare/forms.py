@@ -2,7 +2,7 @@ from django import forms
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 from django.contrib.auth.models import User
 from django.forms import ModelForm
-from .models import UserProfile, DoctorProfile, Appointment, Schedule
+from .models import UserProfile, DoctorProfile, Appointment, Schedule, DoctorApplication
 
 class UserRegistrationForm(UserCreationForm):
     GENDER_CHOICES = [
@@ -141,3 +141,29 @@ class CreateScheduleForm(ModelForm):
     class Meta:
         model = Schedule
         fields = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday']
+
+class DoctorApplicationForm(ModelForm):
+    SPECIALIZATION_CHOICES = [
+        ('Dermatology', 'Dermatology'),
+        ('Family Medicine', 'Family Medicine'),
+        ('Internal Medicine', 'Internal Medicine'),
+        ('Neurosurgery', 'Neurosurgery'),
+        ('Gynaecology', 'Gynaecology'),
+        ('Oncology', 'Oncology'),
+        ('Paediatrics', 'Paediatrics'),
+        ('Psychiatry', 'Psychiatry'),
+        ('Urology', 'Urology'),
+        ('Public Health', 'Public Health'),
+    ]
+
+    STATUS_CHOICE = [
+        ('Approved', 'Approved'),
+        ('Rejected', 'Rejected'),
+    ]
+
+    specialization = forms.CharField(label='Choose Specialization', widget=forms.Select(choices=SPECIALIZATION_CHOICES), required=True)
+    biography = forms.Textarea()
+
+    class Meta:
+        model = DoctorApplication
+        fields = ['specialization', 'county', 'biography']
