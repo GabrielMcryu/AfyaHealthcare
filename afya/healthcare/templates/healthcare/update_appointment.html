@@ -1,17 +1,17 @@
 {% extends 'healthcare/base.html' %}
-{% block title %}Approve{% endblock %}
+{% block title %}Update Appointment{% endblock %}
 {% block content %}
 <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
 <link rel="stylesheet" href="/resources/demos/style.css">
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
 
-<h1>Approve Appointment</h1>
+<h1>Update Appointment</h1>
 <form method="post">
     {% csrf_token %}
-    {{form}}
-    <input type="submit" value="Approve">
-</form>
+    {{form.as_p}}
+    <input type="submit" value="Update Schedule">
+</form> 
 
 {{ filtered_schedule|json_script:"filtered_schedule" }}
 <script>

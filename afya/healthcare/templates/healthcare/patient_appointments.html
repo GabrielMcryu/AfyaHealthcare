@@ -11,6 +11,7 @@
         <th style="border: 1px solid"> </th>
         <th style="border: 1px solid"> </th>
         <th style="border: 1px solid"> </th>
+        <th style="border: 1px solid"> </th>
     </tr>
     {% for appointment in approved_appointments %}
     <tr>
@@ -19,6 +20,7 @@
         <td style="border: 1px solid">{{appointment.status}}</td>
         <td style="border: 1px solid"><a href="{% url 'healthcare:patient_appointment' appointment.id %}">View</a></td>
         <td style="border: 1px solid"><a href="{% url 'healthcare:complete' appointment.id %}">Complete</a></td>
+        <td style="border: 1px solid"><a href="{% url 'healthcare:update_patient_appointment' appointment.id %}">Update</a></td>
         <td style="border: 1px solid"><a href="{% url 'healthcare:cancel' appointment.id %}">Cancel</a></td>
     </tr>
     {% endfor %}

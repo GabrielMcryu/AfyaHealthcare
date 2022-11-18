@@ -85,11 +85,12 @@ class ApproveAppointmentForm(ModelForm):
     ]
     YEARS= [x for x in range(2022,2040)]
 
+    appointment_date = forms.CharField(widget=forms.TextInput(attrs={'id':'appointment_date',}), required=True)
     status = forms.CharField(label='Status', widget=forms.Select(choices=STATUS_CHOICE), required=True)
     
     class Meta:
         model = Appointment
-        fields = ['status']
+        fields = ['appointment_date', 'status']
 
 class RejectAppointmentForm(ModelForm):
     STATUS_CHOICE = [
@@ -123,6 +124,21 @@ class CancelAppointmentForm(ModelForm):
     class Meta:
         model = Appointment
         fields = ['status']
+    
+class UpdateAppointmentForm(ModelForm):
+    appointment_date = forms.CharField(widget=forms.TextInput(attrs={'id':'appointment_date',}), required=True)
+    symptoms = forms.Textarea()
+
+    class Meta:
+        model = Appointment
+        fields = ['appointment_date', 'symptoms']
+
+class UpdatePatientAppointmentForm(ModelForm):
+    appointment_date = forms.CharField(widget=forms.TextInput(attrs={'id':'appointment_date',}), required=True)
+
+    class Meta:
+        model = Appointment
+        fields = ['appointment_date']
 
 class CreateScheduleForm(ModelForm):
     STATUS_CHOICE = [

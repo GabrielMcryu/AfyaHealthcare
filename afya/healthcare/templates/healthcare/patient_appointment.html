@@ -9,9 +9,7 @@
 <p>Gender: {{appointment_data.user.gender}}</p>
 <p>Birth date: {{appointment_data.user.birth_date}}</p>
 <p>Appointment Status: {{appointment_data.status}}</p>
-{% if appointment_data.status == 'Approved' %}
 <p>Date: {{appointment_data.appointment_date}}</p>
-{% endif %}
 <p>Symptoms:</p>
 <p>{{appointment_data.symptoms}}</p>
 <a href="{{request.META.HTTP_REFERER}}">Go back</a>

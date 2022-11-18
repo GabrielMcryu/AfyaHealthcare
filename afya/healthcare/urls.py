@@ -24,4 +24,6 @@ urlpatterns = [
     path('create_schedule/', views.createScheduleView, name='create_schedule'),
     path('update_schedule/', views.updateScheduleView, name='update_schedule'),
     path('careers/', views.doctorApplicationView, name='careers'),
+    path('update_appointment/<int:id>', views.updateAppointmentView, name='update_appointment'),
+    path('update_patient_appointment/<int:id>', views.updatePatientAppointmentView, name='update_patient_appointment'),
 ]

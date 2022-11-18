@@ -32,6 +32,7 @@
         <th style="border: 1px solid">Appointment Status</th>
         <th style="border: 1px solid"> </th>
         <th style="border: 1px solid"> </th>
+        <th style="border: 1px solid"> </th>
     </tr>
     {% for appointments in pending_appointments %}
     <tr>
@@ -40,6 +41,7 @@
         <th style="border: 1px solid">{{appointments.doctor.specialization}}</th>
         <th style="border: 1px solid">{{appointments.status}}</th>
         <th style="border: 1px solid"><a href="{% url 'healthcare:view_appointment' appointments.id %}">View</a></th>
+        <th style="border: 1px solid"><a href="{% url 'healthcare:update_appointment' appointments.id %}">Update</a></th>
         <th style="border: 1px solid"><a href="{% url 'healthcare:cancel' appointments.id %}">Cancel</a></th>
     </tr>
     {% endfor %}

@@ -194,7 +194,19 @@ def approveAppointment(request, id):
         form.save()
         sendEmail(user_email, email_header, doctor_data, symptoms, date)
         return redirect('/dashboard/')
-    context = {'form': form}
+    schedule_data = {}
+    user = request.user
+    doctor = DoctorProfile.objects.get(user=user)
+    doctor_schedule = Schedule.objects.get(doctor=doctor)
+    schedule_data['monday'] = doctor_schedule.monday
+    schedule_data['tuesday'] = doctor_schedule.tuesday
+    schedule_data['wednesday'] = doctor_schedule.wednesday
+    schedule_data['thursday'] = doctor_schedule.thursday
+    schedule_data['friday'] = doctor_schedule.friday
+    schedule_data['saturday'] = doctor_schedule.saturday
+    schedule_data['sunday'] = doctor_schedule.sunday
+    filtered_schedule = appointment_availability(schedule_data)
+    context = {'form': form, 'filtered_schedule': filtered_schedule}
     return render(request, 'healthcare/approve.html', context=context)
 
 @login_required(login_url='/login')
@@ -281,3 +293,46 @@ def doctorApplicationView(request):
     else:
         form = DoctorApplicationForm()
     return render(request, 'healthcare/careers.html', {'form': form})
+
+@login_required(login_url='/login')
+def updateAppointmentView(request, id):
+    schedule_data = {}
+    appointment_data = Appointment.objects.get(id=id)
+    doctor = DoctorProfile.objects.get(id=appointment_data.doctor.id)
+    form = UpdateAppointmentForm(request.POST or None, instance=appointment_data)
+    if form.is_valid():
+        form.save()
+        return redirect('/dashboard/')
+    doctor_schedule = Schedule.objects.get(doctor=doctor)
+    schedule_data['monday'] = doctor_schedule.monday
+    schedule_data['tuesday'] = doctor_schedule.tuesday
+    schedule_data['wednesday'] = doctor_schedule.wednesday
+    schedule_data['thursday'] = doctor_schedule.thursday
+    schedule_data['friday'] = doctor_schedule.friday
+    schedule_data['saturday'] = doctor_schedule.saturday
+    schedule_data['sunday'] = doctor_schedule.sunday
+    filtered_schedule = appointment_availability(schedule_data)
+    context = {'form': form, 'filtered_schedule': filtered_schedule}
+    return render(request, 'healthcare/update_appointment.html', context=context)
+
+@login_required(login_url='/login')
+def updatePatientAppointmentView(request, id):
+    schedule_data = {}
+    appointment_data = Appointment.objects.get(id=id)
+    user_data = request.user
+    doctor = DoctorProfile.objects.get(user=user_data)
+    form = UpdatePatientAppointmentForm(request.POST or None, instance=appointment_data)
+    if form.is_valid():
+        form.save()
+        return redirect('/dashboard/')
+    doctor_schedule = Schedule.objects.get(doctor=doctor)
+    schedule_data['monday'] = doctor_schedule.monday
+    schedule_data['tuesday'] = doctor_schedule.tuesday
+    schedule_data['wednesday'] = doctor_schedule.wednesday
+    schedule_data['thursday'] = doctor_schedule.thursday
+    schedule_data['friday'] = doctor_schedule.friday
+    schedule_data['saturday'] = doctor_schedule.saturday
+    schedule_data['sunday'] = doctor_schedule.sunday
+    filtered_schedule = appointment_availability(schedule_data)
+    context = {'form': form, 'filtered_schedule': filtered_schedule}
+    return render(request, 'healthcare/update_patient_appointment.html', context=context)
