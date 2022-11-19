@@ -2,29 +2,29 @@
 {% block title %}Region{% endblock %}
 {% block content %}
 
-<h1>Region</h1>
+<section class="page--section">
+    <div class="container">
+        <h2 class="page--header">Select County</h2>
+    </div>
 
-<ul>
-    <table style="border: 1px solid">
-        <tr style="border: 1px solid">
-            <th style="border: 1px solid">County</th>
-            <th style="border: 1px solid"> </th>
-        </tr>
-        {% for region in all_regions %}
-        <tr>
-            <td style="border: 1px solid">{{region.county}}</td>
-            <td style="border: 1px solid"><a href="{% url 'healthcare:all_doctors_view' region.id %}">View</a></td>
-        </tr>
-        {% endfor %}
-    </table>
-</ul>
+    <div class="container table">
+        <table class="t--style-r">
+            <thead>
+                <tr>
+                    <th>County</th>
+                    <th> </th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for region in all_regions %}
+                <tr>
+                    <td class="td-normal">{{region.county}}</td>
+                    <td class="link-align-r"><a href="{% url 'healthcare:all_doctors_view' region.id %}" class="btn--full">View</a></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</section> 
 
-{{ my_data|json_script:"my_data" }}
-<script>
-    const mydata = JSON.parse(document.getElementById('my_data').textContent);
-    console.log(mydata)
-    for (data in mydata) {
-        console.log(data)
-    }
-</script>
 {% endblock %}

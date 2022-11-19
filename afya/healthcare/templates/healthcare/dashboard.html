@@ -27,22 +27,22 @@
                 <a class="btn" href="{% url 'healthcare:doctor_profile' %}">Update Doctor Profile</a>
             </div>
         </div>
-    {% if not doctor_data.has_schedule %}
+        {% if not doctor_data.has_schedule %}
         <div class="dash">
             <img class="dashboard--img" src="{% static 'healthcare/img/main.jpg' %}" />
             <div class="dash-btn">
                 <a class="btn" href="{% url 'healthcare:create_schedule' %}">Create your Schedule</a>
             </div>
         </div>
-    {% else %}
+        {% else %}
         <div class="dash">
             <img class="dashboard--img" src="{% static 'healthcare/img/main.jpg' %}" />
             <div class="dash-btn">
                 <a class="btn" href="{% url 'healthcare:update_schedule' %}">Update your Schedule</a>
             </div>
         </div>
+        {% endif %}
     </div>
-    {% endif %}
     {% endif %}
 
     <div class="container">
@@ -67,15 +67,15 @@
                 <a class="btn" href="{% url 'healthcare:view_appointments' %}">View Appointments</a>
             </div>
         </div>
-    {% if check_doctor < 1 and check_application < 1 %}
+        {% if check_doctor < 1 and check_application < 1 %}
         <div class="dash">
             <img class="dashboard--img" src="{% static 'healthcare/img/main.jpg' %}" />
             <div class="dash-btn">
                 <a class="btn" href="{% url 'healthcare:careers' %}">Apply as a Doctor</a>
             </div>
         </div>
+        {% endif %}
     </div>
-    {% endif %}
 </section>
 
 {% endblock %}

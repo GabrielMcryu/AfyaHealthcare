@@ -1,70 +1,96 @@
 {% extends 'healthcare/base.html' %}
 {% block title %}View Appointments{% endblock %}
 {% block content %}
-<h1>Approved Appointments</h1>
-<table style="border: 1px solid">
-    <tr>
-        <th style="border: 1px solid">Doctor</th>
-        <th style="border: 1px solid">Created at</th>
-        <th style="border: 1px solid">Specialization</th>
-        <th style="border: 1px solid">Appointment Status</th>
-        <th style="border: 1px solid"> </th>
-        <th style="border: 1px solid"> </th>
-    </tr>
-    {% for appointments in approved_appointments %}
-    <tr>
-        <th style="border: 1px solid">{{appointments.doctor.user.first_name}} {{appointments.doctor.user.last_name}}</th>
-        <th style="border: 1px solid">{{appointments.created_at}}</th>
-        <th style="border: 1px solid">{{appointments.doctor.specialization}}</th>
-        <th style="border: 1px solid">{{appointments.status}}</th>
-        <th style="border: 1px solid"><a href="{% url 'healthcare:view_appointment' appointments.id %}">View</a></th>
-        <th style="border: 1px solid"><a href="{% url 'healthcare:cancel' appointments.id %}">Cancel</a></th>
-    </tr>
-    {% endfor %}
-</table>
 
-<h1>Pending Appointments</h1>
-<table style="border: 1px solid">
-    <tr>
-        <th style="border: 1px solid">Doctor</th>
-        <th style="border: 1px solid">Created at</th>
-        <th style="border: 1px solid">Specialization</th>
-        <th style="border: 1px solid">Appointment Status</th>
-        <th style="border: 1px solid"> </th>
-        <th style="border: 1px solid"> </th>
-        <th style="border: 1px solid"> </th>
-    </tr>
-    {% for appointments in pending_appointments %}
-    <tr>
-        <th style="border: 1px solid">{{appointments.doctor.user.first_name}} {{appointments.doctor.user.last_name}}</th>
-        <th style="border: 1px solid">{{appointments.created_at}}</th>
-        <th style="border: 1px solid">{{appointments.doctor.specialization}}</th>
-        <th style="border: 1px solid">{{appointments.status}}</th>
-        <th style="border: 1px solid"><a href="{% url 'healthcare:view_appointment' appointments.id %}">View</a></th>
-        <th style="border: 1px solid"><a href="{% url 'healthcare:update_appointment' appointments.id %}">Update</a></th>
-        <th style="border: 1px solid"><a href="{% url 'healthcare:cancel' appointments.id %}">Cancel</a></th>
-    </tr>
-    {% endfor %}
-</table>
+<section class="page--section">
+    <div class="container">
+        <h2 class="page--header">View Appointments</h2>
+    </div>
 
-<h1>Rejected Appointments</h1>
-<table style="border: 1px solid">
-    <tr>
-        <th style="border: 1px solid">Doctor</th>
-        <th style="border: 1px solid">Created at</th>
-        <th style="border: 1px solid">Specialization</th>
-        <th style="border: 1px solid">Appointment Status</th>
-        <th style="border: 1px solid"> </th>
-    </tr>
-    {% for appointments in rejected_appointments %}
-    <tr>
-        <th style="border: 1px solid">{{appointments.doctor.user.first_name}} {{appointments.doctor.user.last_name}}</th>
-        <th style="border: 1px solid">{{appointments.created_at}}</th>
-        <th style="border: 1px solid">{{appointments.doctor.specialization}}</th>
-        <th style="border: 1px solid">{{appointments.status}}</th>
-        <th style="border: 1px solid"><a href="{% url 'healthcare:view_appointment' appointments.id %}">View</a></th>
-    </tr>
-    {% endfor %}
-</table>
+    <div class="container table">
+        <h3 class="table--titles">Approved Appointments</h3>
+        <table class="t--style">
+            <thead>
+                <tr>
+                    <th>Doctor</th>
+                    <th>Created At</th>
+                    <th>Specialization</th>
+                    <th>Appointment Status</th>
+                    <th> </th>
+                    <th> </th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for appointments in approved_appointments %}
+                <tr>
+                    <td class="td-normal">{{appointments.doctor.user.first_name}} {{appointments.doctor.user.last_name}}</td>
+                    <td class="td-normal">{{appointments.created_at}}</td>
+                    <td class="td-normal">{{appointments.doctor.specialization}}</td>
+                    <td class="td-normal">{{appointments.status}}</td>
+                    <td class="link-align"><a href="{% url 'healthcare:view_appointment' appointments.id %}" class="btn--full">View</a></td>
+                    <td class="link-align"><a href="{% url 'healthcare:cancel' appointments.id %}" class="btn--cancel">Cancel</a></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <div class="container table">
+        <h3 class="table--titles">Pending Appointments</h3>
+        <table class="t--style">
+            <thead>
+                <tr>
+                    <th>Doctor</th>
+                    <th>Created At</th>
+                    <th>Specialization</th>
+                    <th>Appointment Status</th>
+                    <th> </th>
+                    <th> </th>
+                    <th> </th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for appointments in pending_appointments %}
+                <tr>
+                    <td class="td-normal">{{appointments.doctor.user.first_name}} {{appointments.doctor.user.last_name}}</td>
+                    <td class="td-normal">{{appointments.created_at}}</td>
+                    <td class="td-normal">{{appointments.doctor.specialization}}</td>
+                    <td class="td-normal">{{appointments.status}}</td>
+                    <td class="link-align"><a href="{% url 'healthcare:view_appointment' appointments.id %}" class="btn--full">View</a></td>
+                    <td class="link-align"><a href="{% url 'healthcare:update_appointment' appointments.id %}" class="btn--update">Update</a></td>
+                    <td class="link-align"><a href="{% url 'healthcare:cancel' appointments.id %}" class="btn--cancel">Cancel</a></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <div class="container table">
+        <h3 class="table--titles">Rejected Appointments</h3>
+        <table class="t--style">
+            <thead>
+                <tr>
+                    <th>Doctor</th>
+                    <th>Created At</th>
+                    <th>Specialization</th>
+                    <th>Appointment Status</th>
+                    <th> </th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for appointments in rejected_appointments %}
+                <tr>
+                    <td class="td-normal">{{appointments.doctor.user.first_name}} {{appointments.doctor.user.last_name}}</td>
+                    <td class="td-normal">{{appointments.created_at}}</td>
+                    <td class="td-normal">{{appointments.doctor.specialization}}</td>
+                    <td class="td-normal">{{appointments.status}}</td>
+                    <td class="link-align"><a href="{% url 'healthcare:view_appointment' appointments.id %}" class="btn--full">View</a></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</section>
+
 
 {% endblock %}

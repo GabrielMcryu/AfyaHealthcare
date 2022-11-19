@@ -1,13 +1,43 @@
 {% extends 'healthcare/base.html' %}
 {% block title %}View Appointments{% endblock %}
 {% block content %}
-<h1>Appointment</h1>
-<p>Doctor: {{appointment_data.doctor.user.first_name}} {{appointment_data.doctor.user.last_name}}</p>
-<p>Specialization: {{appointment_data.doctor.specialization}}</p>
-<p>County: {{appointment_data.doctor.county.county}}</p>
-<p>Appointment Status: {{appointment_data.status}}</p>
-<p>Date: {{appointment_data.appointment_date}}</p>
-<p>Symptoms:</p>
-<p>{{appointment_data.symptoms}}</p>
-<a href="{{request.META.HTTP_REFERER}}">Go back</a>
+
+<section class="page--section">
+    <div class="container">
+        <h2 class="page--header">Appointment</h2>
+    </div>
+
+    <div class="profile--container">
+        <div class="item--row">
+            <p class="font--bold">Doctor:</p>
+            <p>{{appointment_data.doctor.user.first_name}} {{appointment_data.doctor.user.last_name}}</p>
+        </div>
+        <div class="item--row">
+            <p class="font--bold">Specialization:</p>
+            <p>{{appointment_data.doctor.specialization}}</p>
+        </div>
+        <div class="item--row">
+            <p class="font--bold">County:</p>
+            <p>{{appointment_data.doctor.county.county}}</p>
+        </div>
+        <div class="item--row">
+            <p class="font--bold">Appointment Status:</p>
+            <p>{{appointment_data.status}}</p>
+        </div>
+        <div class="item--row">
+            <p class="font--bold">Date:</p>
+            <p>{{appointment_data.appointment_date}}</p>
+        </div>
+        <div class="item--head">
+            <p class="font--bold">Symptoms</p>
+        </div>
+        <div class="item--bio">
+            <p>{{appointment_data.symptoms}}</p>
+        </div>
+        <div class="item--button">
+            <a href="{{request.META.HTTP_REFERER}}" class="btn--full">Go back</a>
+        </div>
+    </div>
+</section>
+
 {% endblock %}

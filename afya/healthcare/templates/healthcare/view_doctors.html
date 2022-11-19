@@ -2,26 +2,40 @@
 {% block title %}View Doctors{% endblock %}
 {% block content %}
 
-<h1>Doctors</h1>
-<table style="border: 1px solid">
-    <tr>
-        <th style="border: 1px solid">Name</th>
-        <th style="border: 1px solid">Specialization</th>
-        <th style="border: 1px solid"> </th>
-        <th style="border: 1px solid"> </th>
-    </tr>
-    {% for doctor in doctor_list.all %}
-    {% if doctor.has_schedule %}
-    <tr>
-        <td style="border: 1px solid">Dr. {{doctor.user.first_name}} {{doctor.user.last_name}}</td>
-        <td style="border: 1px solid">{{doctor.specialization}}</td>
-        <td style="border: 1px solid"><a href="{% url 'healthcare:doctor' doctor.id %}">View</a></td>
-        {% if not doctor.user_id == request.user.id and check_appointments < 1 %}
-        <td style="border: 1px solid"><a href="{% url 'healthcare:book_appointment' doctor.id %}">Book Appointment</a></td>
-        {% endif %}
-    </tr>
-    {% endif %}
-    {% endfor %}
-</table>
+
+<section class="page--section">
+    <div class="container">
+        <h2 class="page--header">Select Doctor</h2>
+    </div>
+
+    <div class="container table">
+        <table class="t--style">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Specialization</th>
+                    <th></th>
+                    {% if check_appointments < 1 %}
+                    <th></th>
+                    {% endif %}
+                </tr>
+            </thead>
+            <tbody>
+                {% for doctor in doctor_list.all %}
+                {% if doctor.has_schedule %}
+                <tr>
+                    <td class="td-normal">Dr. {{doctor.user.first_name}} {{doctor.user.last_name}}</td>
+                    <td class="td-normal">{{doctor.specialization}}</td>
+                    <td class="link-align"><a href="{% url 'healthcare:doctor' doctor.id %}" class="btn--full">View</a></td>
+                    {% if not doctor.user_id == request.user.id and check_appointments < 1 %}
+                    <td class="link-align"><a href="{% url 'healthcare:book_appointment' doctor.id %}" class="btn--confirm">Book Appointment</a></td>
+                    {% endif %}
+                </tr>
+                {% endif %}
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</section>
 
 {% endblock %}

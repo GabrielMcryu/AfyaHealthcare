@@ -1,8 +1,38 @@
 {% extends 'healthcare/base.html' %}
 {% block title %}Doctor{% endblock %}
-<h1>Doctor</h1>
-
 {% block content %}
+
+<section class="page--section">
+    <div class="container">
+        <h2 class="page--header">Doctor Profile</h2>
+    </div>
+
+    <div class="profile--container">
+        <div class="item--row">
+            <p class="font--bold">Name:</p>
+            <p>Dr. {{doctor_data.user.first_name}} {{doctor_data.user.last_name}}</p>
+        </div>
+        <div class="item--row">
+            <p class="font--bold">Specialization:</p>
+            <p>{{doctor_data.specialization}}</p>
+        </div>
+        <div class="item--row">
+            <p class="font--bold">County:</p>
+            <p>{{doctor_data.county.county}}</p>
+        </div>
+        <div class="item--head">
+            <p class="font--bold">Biography:</p>
+        </div>
+        <div class="item--bio">
+            <p>{{doctor_data.biography}}</p>
+        </div>
+        <div class="item--button">
+            <a href="{{request.META.HTTP_REFERER}}" class="btn--full">Go back</a>
+        </div>
+    </div>
+</section>
+
+
 <p>Name: Dr. {{doctor_data.user.first_name}} {{doctor_data.user.last_name}}</p>
 <p>Specialization: {{doctor_data.specialization}}</p>
 <p>County: {{doctor_data.county.county}}</p>

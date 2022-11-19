@@ -160,7 +160,7 @@ body {
     text-align: center;
     font-size: 3.6rem;
     color: #228be6;
-    padding: 1.8rem 0;
+    padding: 3.2rem 0;
 }
 
 .page--sub-header {
@@ -217,7 +217,7 @@ body {
 }
 
 .page--section {
-    min-height: 85vh;
+    min-height: 70vh;
     padding-bottom: 6.4rem;
 }
 
@@ -252,7 +252,19 @@ body {
     box-shadow: 0 2.4rem 4.8rem rgba(0, 0, 0, 0.1);
 }
 
+.t--style-r {
+    width: 60%;
+    border-collapse: collapse;
+    box-shadow: 0 2.4rem 4.8rem rgba(0, 0, 0, 0.1);
+    margin-left: auto;
+    margin-right: auto;
+}
+
 .t--style th{
+    padding: 1.8rem;
+}
+
+.t--style-r th{
     padding: 1.8rem;
 }
 
@@ -260,7 +272,18 @@ body {
     padding: 1.8rem;
 }
 
+.t--style-r td {
+    padding: 1.8rem;
+}
+
 .t--style th {
+    text-align: left;
+    font-size: 1.8rem;
+    background-color: #339af0;
+    color: #fff;
+}
+
+.t--style-r th {
     text-align: left;
     font-size: 1.8rem;
     background-color: #339af0;
@@ -278,8 +301,13 @@ body {
     font-size: 1.2rem;
 }
 
+
 .link-align {
     text-align: center;
+}
+
+.link-align-r {
+    text-align: right;
 }
 
 .btn--full,
@@ -334,6 +362,28 @@ body {
     text-decoration: none;
     font-size: 1.2rem;
     background-color: #37b24d;
+    color: #fff;
+    font-weight: 600;
+    padding: 1.6rem 3.2rem;
+    border-radius: 9px;
+
+    /* Only necessary for .btn */
+    border: none;
+    cursor: pointer;
+    font-family: inherit;
+
+    /* Put transition on original "state" */
+    transition: all 0.3s;
+}
+
+.btn--update,
+.btn--update:link,
+.btn--update:visited {
+    display: inline-block;
+
+    text-decoration: none;
+    font-size: 1.2rem;
+    background-color: #343a40;
     color: #fff;
     font-weight: 600;
     padding: 1.6rem 3.2rem;
