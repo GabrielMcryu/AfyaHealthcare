@@ -15,7 +15,7 @@
 <body>
     <header class="header">
         <a href="#">
-            <img src="{% static 'healthcare/images/afya-r.png' %}" alt="Afya logo" class="logo" />
+            <img src="{% static 'healthcare/img/afya-r.png' %}" alt="Afya logo" class="logo" />
         </a>
         <nav>
             <ul class="main-nav-list">
@@ -30,17 +30,12 @@
             </ul>
         </nav>
     </header>
-    {% comment %} <nav>
-        <ul>
-            {% if user.is_authenticated %}
-            <li><a class="main-nav-link" href="{% url 'healthcare:dashboard' %}">Dashboard</a></li>
-            <li><a class="main-nav-link" href="#">Logged in as {{user.username}}</a></li>
-            <li><a class="main-nav-link" href="/logout">Logout</a></li>
-            {% else %}
-            <li><a class="main-nav-link" href="/login">Login</a></li>
-            {% endif %}
-        </ul>     
-    </nav> {% endcomment %}
-    <section>{% block content %} {% endblock %}</section>
+    <main>{% block content %} {% endblock %}</main>
+    <footer class="footer">
+        <p class="copyright">
+            Copyright &copy; <span class="year">2027</span> by Afya Healthcare.
+            All rights reserved.
+        </p>
+    </footer>
 </body>
 </html>
