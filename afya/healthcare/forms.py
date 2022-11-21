@@ -13,21 +13,34 @@ class UserRegistrationForm(UserCreationForm):
     YEARS= [x for x in range(1940,2021)]
     # years=YEARS
 
+    username = forms.CharField(
+        max_length=200,
+        required=True,
+        widget=forms.TextInput(attrs={'class': 'input-field', 'placeholder': 'Username'})
+    )
+    password1 = forms.CharField(
+        required = True,
+        widget=forms.PasswordInput(attrs={'class': 'input-field', 'placeholder': 'Password'}),
+        )
+    password2 = forms.CharField(
+        required = True,
+        widget=forms.PasswordInput(attrs={'class': 'input-field', 'placeholder': 'Password Again'}),
+        )
     email = forms.EmailField(required=True)
-    phone = forms.CharField(required=True)
-    gender = forms.CharField(label='Choose your Gender', widget=forms.Select(choices=GENDER_CHOICES), required=True)
-    # birth_date = forms.DateField(label='What is your birth date', widget=forms.SelectDateWidget(attrs={'class':'birth_date'}), required=True)
-    birth_date = forms.CharField(widget=forms.TextInput(attrs={'class':'birth_date',}), required=True)
+    phone = forms.CharField(required=True, widget=forms.TextInput(attrs={'class': 'input-field', 'placeholder': 'Enter your phone number'}))
+    gender = forms.CharField(label='Choose your Gender', widget=forms.Select(choices=GENDER_CHOICES, attrs={'class': 'input-field'}), required=True)
+    birth_date = forms.CharField(widget=forms.TextInput(attrs={'class': 'input-field', 'id':'birth_date', 'placeholder': 'Enter birth date', 'autocomplete': 'off'}), required=True)
     class Meta:
         model = User
         fields = ['username', 'first_name', 'last_name', 'email', 'password1', 'password2', 'phone', 'gender', 'birth_date']
 
-    # def __init__(self, *args, **kwargs):
-    #     super().__init__(*args, **kwargs)
-    #     self.fields['birth_date'].widget.attrs.update({'id': 'birth_date'})
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['email'].widget.attrs.update({'class': 'input-field', 'placeholder': 'Enter email'})
+        self.fields['first_name'].widget.attrs.update({'class': 'input-field', 'placeholder': 'Enter First Name'})
+        self.fields['last_name'].widget.attrs.update({'class': 'input-field', 'placeholder': 'Enter Last Name'})
 
 class UpdateUserForm(UserChangeForm):
-
     password = None
     email = forms.EmailField(required=True)
     class Meta:

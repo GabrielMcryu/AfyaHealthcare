@@ -186,11 +186,19 @@ body {
 }
 
 .form--content label {
-    display: block;
-    font-size: 1.6rem;
-    font-weight: 500;
-    margin-bottom: 1.2rem;
-    color: #fff;
+    display: block !important;
+    font-size: 1.6rem !important;
+    font-weight: 500 !important;
+    margin-bottom: 1.2rem !important;
+    color: #fff !important;
+}
+
+.form--label {
+    display: block !important;
+    font-size: 1.6rem !important;
+    font-weight: 500 !important;
+    margin-bottom: 1.2rem !important;
+    color: #fff !important;
 }
 
 .input-field{
@@ -201,6 +209,7 @@ body {
 	font-size: 1.6rem;
     border: 1px solid #e7f5ff;
     margin-bottom: 1.2rem;
+    text-align: left;
 }
 
 

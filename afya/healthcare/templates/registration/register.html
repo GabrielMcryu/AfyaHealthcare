@@ -6,13 +6,17 @@
     <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
     <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
 
-    <h1>Register</h1>
-    <form method="post">
-        {% csrf_token %}
-        {{form.as_p}}
-        <input type="submit" value="Register">
-        <p>Have an account? Login <a href="/login">Here</a></p>
-    </form>
+<section class="section--form">
+    <div class="form--container">
+        <h2 class="page--header">SIGN UP</h2>
+        <form class="form--content" method="post">
+            {% csrf_token %}
+            {{form}}
+            <input type="submit" value="Register" class="submit-btn">
+            <p>Have an account? Login <a href="/login">Here</a></p>
+        </form>
+    </div>
+</section>
 
     <script>
         $( function() {
@@ -20,7 +24,7 @@
             days = 365 * 18
             var maxDate = new Date()
             maxDate.setDate(maxDate.getDate() - days)
-            $("#id_birth_date").datepicker({
+            $("#birth_date").datepicker({
                 changeYear: true,
                 changeMonth: true,
                 dateFormat: 'yy-mm-dd',
@@ -28,7 +32,10 @@
                 // minDate: minDate,
                 maxDate: maxDate,
             })
+            $(".ui-datepicker").css("font-size","2em")
         })
+
+        $(".ui-datepicker").css("font-size","150%")
     </script>
     
 {% endblock %}

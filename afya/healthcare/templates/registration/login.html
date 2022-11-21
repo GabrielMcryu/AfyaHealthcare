@@ -1,20 +1,20 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    {% block title %}Login{% endblock  %}
-    {% block content %}
-    <form method='POST'>
-        {% csrf_token %}
-        {{form}}
-        <p>Don't have an account? Create one <a href="/register">Here</a></p>
-        <button type='submit'>Login</button>
-    </form>
-    {% endblock %}
-</body>
-</html>
+{% extends 'healthcare/base.html' %}
+{% block title %}Login Page{% endblock %}
+{% block content %}
+{% load widget_tweaks %}
+<section class="section--form">
+    <div class="form--container">
+        <h2 class="page--header">Log In</h2>
+        <form class="form--content" method='POST'>
+            {% csrf_token %}
+            <label>Username</label>
+            {{ form.username|add_class:'input-field' }}
+            <label>Password</label>
+            {{ form.password|add_class:'input-field' }}
+            <p>Don't have an account? Create one <a href="/register">Here</a></p>
+            <input value="Login" class='submit-btn' type='submit'>
+        </form>
+    </div>
+</section>
+
+{% endblock %}
