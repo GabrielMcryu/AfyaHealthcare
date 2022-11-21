@@ -19,12 +19,6 @@
 
 <h1>Book an appointment</h1>
 
-<form method="post">
-    {% csrf_token %}
-    {{form.as_p}}
-    <input type="submit" value="Submit">
-</form>
-
 {{ filtered_schedule|json_script:"filtered_schedule" }}
 <script>
     const filteredSchedule = JSON.parse(document.getElementById('filtered_schedule').textContent);
