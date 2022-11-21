@@ -30,22 +30,33 @@ class UserRegistrationForm(UserCreationForm):
     phone = forms.CharField(required=True, widget=forms.TextInput(attrs={'class': 'input-field', 'placeholder': 'Enter your phone number'}))
     gender = forms.CharField(label='Choose your Gender', widget=forms.Select(choices=GENDER_CHOICES, attrs={'class': 'input-field'}), required=True)
     birth_date = forms.CharField(widget=forms.TextInput(attrs={'class': 'input-field', 'id':'birth_date', 'placeholder': 'Enter birth date', 'autocomplete': 'off'}), required=True)
+    
     class Meta:
         model = User
         fields = ['username', 'first_name', 'last_name', 'email', 'password1', 'password2', 'phone', 'gender', 'birth_date']
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.fields['email'].widget.attrs.update({'class': 'input-field', 'placeholder': 'Enter email'})
+        self.fields['email'].widget.attrs.update({'class': 'input-field', 'placeholder': 'Enter Email'})
         self.fields['first_name'].widget.attrs.update({'class': 'input-field', 'placeholder': 'Enter First Name'})
         self.fields['last_name'].widget.attrs.update({'class': 'input-field', 'placeholder': 'Enter Last Name'})
 
 class UpdateUserForm(UserChangeForm):
     password = None
+    username = forms.CharField(
+        max_length=200,
+        required=True,
+        widget=forms.TextInput(attrs={'class': 'input-field', 'placeholder': 'Username'})
+    )
     email = forms.EmailField(required=True)
     class Meta:
         model = User
         fields = ['username', 'first_name', 'last_name', 'email']
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['email'].widget.attrs.update({'class': 'input-field', 'placeholder': 'Enter Email'})
+        self.fields['first_name'].widget.attrs.update({'class': 'input-field', 'placeholder': 'Enter First Name'})
+        self.fields['last_name'].widget.attrs.update({'class': 'input-field', 'placeholder': 'Enter Last Name'})
 
 class UpdateUserProfileForm(ModelForm):
     GENDER_CHOICES = [
@@ -57,7 +68,12 @@ class UpdateUserProfileForm(ModelForm):
 
     phone = forms.CharField(required=True)
     gender = forms.CharField(label='Choose your Gender', widget=forms.Select(choices=GENDER_CHOICES), required=True)
-    birth_date = forms.CharField(widget=forms.TextInput(attrs={'class':'birth_date',}), required=True)
+    birth_date = forms.CharField(widget=forms.TextInput(attrs={'class':'input-field', 'id': 'birth_date'}), required=True)
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['phone'].widget.attrs.update({'class': 'input-field', 'placeholder': 'Phone number'})
+        self.fields['gender'].widget.attrs.update({'class': 'input-field',})
 
     class Meta:
         model = UserProfile
@@ -83,14 +99,24 @@ class UpdateDoctorProfileForm(ModelForm):
     class Meta:
         model = DoctorProfile
         fields = ['specialization', 'county', 'biography']
+    
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['specialization'].widget.attrs.update({'class': 'input-field'})
+        self.fields['county'].widget.attrs.update({'class': 'input-field',})
+        self.fields['biography'].widget.attrs.update({'class': 'input-field', 'cols': '30', 'rows': '10'})
 
 class BookAppointmentForm(ModelForm):
-    appointment_date = forms.CharField(widget=forms.TextInput(attrs={'id':'appointment_date',}), required=True)
+    appointment_date = forms.CharField(widget=forms.TextInput(attrs={'id':'appointment_date', 'class': 'input-field', 'placeholder': 'Enter Date', 'autocomplete': 'off'}), required=True)
     symptoms = forms.Textarea()
 
     class Meta:
         model = Appointment
         fields = ['appointment_date', 'symptoms']
+    
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['symptoms'].widget.attrs.update({'class': 'input-field', 'cols': '30', 'rows': '10'})
 
 class ApproveAppointmentForm(ModelForm):
     STATUS_CHOICE = [
@@ -98,12 +124,16 @@ class ApproveAppointmentForm(ModelForm):
     ]
     YEARS= [x for x in range(2022,2040)]
 
-    appointment_date = forms.CharField(widget=forms.TextInput(attrs={'id':'appointment_date',}), required=True)
+    appointment_date = forms.CharField(widget=forms.TextInput(attrs={'id':'appointment_date', 'class': 'input-field', 'autocomplete': 'off'}), required=True)
     status = forms.CharField(label='Status', widget=forms.Select(choices=STATUS_CHOICE), required=True)
     
     class Meta:
         model = Appointment
         fields = ['appointment_date', 'status']
+    
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['status'].widget.attrs.update({'class': 'input-field'})
 
 class RejectAppointmentForm(ModelForm):
     STATUS_CHOICE = [
@@ -115,6 +145,10 @@ class RejectAppointmentForm(ModelForm):
     class Meta:
         model = Appointment
         fields = ['status']
+    
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['status'].widget.attrs.update({'class': 'input-field'})
 
 class CompleteAppointmentForm(ModelForm):
     STATUS_CHOICE = [
@@ -127,6 +161,10 @@ class CompleteAppointmentForm(ModelForm):
         model = Appointment
         fields = ['status']
 
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['status'].widget.attrs.update({'class': 'input-field'})
+
 class CancelAppointmentForm(ModelForm):
     STATUS_CHOICE = [
         ('Cancelled', 'Cancelled')
@@ -137,17 +175,25 @@ class CancelAppointmentForm(ModelForm):
     class Meta:
         model = Appointment
         fields = ['status']
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['status'].widget.attrs.update({'class': 'input-field'})
     
 class UpdateAppointmentForm(ModelForm):
-    appointment_date = forms.CharField(widget=forms.TextInput(attrs={'id':'appointment_date',}), required=True)
+    appointment_date = forms.CharField(widget=forms.TextInput(attrs={'id':'appointment_date', 'class': 'input-field'}), required=True)
     symptoms = forms.Textarea()
 
     class Meta:
         model = Appointment
         fields = ['appointment_date', 'symptoms']
 
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['symptoms'].widget.attrs.update({'class': 'input-field', 'cols': '30', 'rows': '10'})
+
 class UpdatePatientAppointmentForm(ModelForm):
-    appointment_date = forms.CharField(widget=forms.TextInput(attrs={'id':'appointment_date',}), required=True)
+    appointment_date = forms.CharField(widget=forms.TextInput(attrs={'id':'appointment_date', 'class': 'input-field'}), required=True)
 
     class Meta:
         model = Appointment
@@ -170,6 +216,16 @@ class CreateScheduleForm(ModelForm):
     class Meta:
         model = Schedule
         fields = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday']
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['monday'].widget.attrs.update({'class': 'input-field'})
+        self.fields['tuesday'].widget.attrs.update({'class': 'input-field'})
+        self.fields['wednesday'].widget.attrs.update({'class': 'input-field'})
+        self.fields['thursday'].widget.attrs.update({'class': 'input-field'})
+        self.fields['friday'].widget.attrs.update({'class': 'input-field'})
+        self.fields['saturday'].widget.attrs.update({'class': 'input-field'})
+        self.fields['sunday'].widget.attrs.update({'class': 'input-field'})
 
 class DoctorApplicationForm(ModelForm):
     SPECIALIZATION_CHOICES = [
@@ -196,3 +252,9 @@ class DoctorApplicationForm(ModelForm):
     class Meta:
         model = DoctorApplication
         fields = ['specialization', 'county', 'biography']
+    
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['specialization'].widget.attrs.update({'class': 'input-field'})
+        self.fields['county'].widget.attrs.update({'class': 'input-field',})
+        self.fields['biography'].widget.attrs.update({'class': 'input-field', 'cols': '30', 'rows': '10'})

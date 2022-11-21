@@ -1,11 +1,16 @@
 {% extends 'healthcare/base.html' %}
 {% block title %}Update Schedule{% endblock %}
 {% block content %}
-<h1>Create Schedule</h1>
 
-<form method="post">
-    {% csrf_token %}
-    {{form.as_p}}
-    <input type="submit" value="Update Schedule">
-</form>
+<section class="section--form">
+    <div class="form--container">
+        <h2 class="page--header">Update Schedule</h2>
+        <form class="form--content" method="post">
+            {% csrf_token %}
+            {{form}}
+            <input class="submit-btn" type="submit" value="Update Schedule">
+        </form>
+    </div>
+</section>
+
 {% endblock %}

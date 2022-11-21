@@ -1,10 +1,16 @@
 {% extends 'healthcare/base.html' %}
 {% block title %}Complete{% endblock %}
 {% block content %}
-<h1>Complete Appointment</h1>
-<form method="post">
-    {% csrf_token %}
-    {{form}}
-    <input type="submit" value="Complete">
-</form>
+
+<section class="section--form">
+    <div class="form--container">
+        <h2 class="page--header">Complete Appointment</h2>
+        <form class="form--content" method="post">
+            {% csrf_token %}
+            {{form}}
+            <input class="submit-btn" type="submit" value="Complete">
+        </form>
+    </div>
+</section>
+
 {% endblock %}

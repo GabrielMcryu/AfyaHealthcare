@@ -13,7 +13,7 @@
             {% csrf_token %}
             {{form}}
             <input type="submit" value="Register" class="submit-btn">
-            <p>Have an account? Login <a href="/login">Here</a></p>
+            <p class="account--text">Have an account? Login <a class='account--link' href="/login">Here</a></p>
         </form>
     </div>
 </section>
@@ -35,7 +35,7 @@
             $(".ui-datepicker").css("font-size","2em")
         })
 
-        $(".ui-datepicker").css("font-size","150%")
+        {% comment %} $(".ui-datepicker").css("font-size","150%") {% endcomment %}
     </script>
     
 {% endblock %}

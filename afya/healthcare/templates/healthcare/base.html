@@ -14,9 +14,15 @@
 </head>
 <body>
     <header class="header">
-        <a href="#">
+        {% if user.is_authenticated %}
+        <a href="{% url 'healthcare:dashboard' %}">
             <img src="{% static 'healthcare/img/afya-r.png' %}" alt="Afya logo" class="logo" />
         </a>
+        {% else %}
+        <a href="{% url 'healthcare:index' %}">
+            <img src="{% static 'healthcare/img/afya-r.png' %}" alt="Afya logo" class="logo" />
+        </a>
+        {% endif %}
         <nav>
             <ul class="main-nav-list">
                 {% if user.is_authenticated %}

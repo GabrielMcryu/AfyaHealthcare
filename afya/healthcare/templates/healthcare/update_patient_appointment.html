@@ -6,12 +6,16 @@
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
 
-<h1>Update Appointment</h1>
-<form method="post">
-    {% csrf_token %}
-    {{form.as_p}}
-    <input type="submit" value="Update Schedule">
-</form> 
+<section class="section--form">
+    <div class="form--container">
+        <h2 class="page--header">Update Appointment</h2>
+        <form class="form--content" method="post">
+            {% csrf_token %}
+            {{form}}
+            <input class="submit-btn" type="submit" value="Update Schedule">
+        </form> 
+    </div>
+</section>
 
 {{ filtered_schedule|json_script:"filtered_schedule" }}
 <script>
@@ -32,6 +36,7 @@
             return [filteredSchedule.indexOf(date.getDay()) > -1]
         },
         });
+        $(".ui-datepicker").css("font-size","2em")
     } );
 </script>
 {% endblock %}

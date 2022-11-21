@@ -1,10 +1,16 @@
 {% extends 'healthcare/base.html' %}
 {% block title %}Cancel{% endblock %}
 {% block content %}
-<h1>Cancel Appointment</h1>
-<form method="post">
-    {% csrf_token %}
-    {{form}}
-    <input type="submit" value="Cancel">
-</form>
+
+<section class="section--form">
+    <div class="form--container">
+        <h2 class="page--header">Cancel Appointment</h2>
+        <form class="form--content" method="post">
+            {% csrf_token %}
+            {{form}}
+            <input class="submit-btn" type="submit" value="Cancel">
+        </form>
+    </div>
+</section>
+
 {% endblock %}

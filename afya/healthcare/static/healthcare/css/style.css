@@ -464,3 +464,14 @@ body {
     border: 1px solid #adb5bd;
     margin: auto 32rem;
 }
+
+.account--text {
+    color: #fff;
+    padding-top: 1.8rem;
+    font-size: 1.8rem;
+}
+
+.account--link {
+    color: #fff;
+    font-weight: bold;
+}

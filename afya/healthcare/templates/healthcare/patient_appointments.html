@@ -39,7 +39,7 @@
     </div>
 
     <div class="container table">
-        <h3 class="table--titles">Approved Appointments</h3>
+        <h3 class="table--titles">Pending Appointments</h3>
         <table class="t--style">
             <thead>
                 <tr>
@@ -59,7 +59,7 @@
                     <td class="td-normal">{{appointment.created_at}}</td>
                     <td class="td-normal">{{appointment.status}}</td>
                     <td class="link-align"><a href="{% url 'healthcare:patient_appointment' appointment.id %}" class="btn--full">View</a></td>
-                    <td class="link-align"><a href="{% url 'healthcare:approve' appointment.id %}" class="btn--confirm">Complete</a></td>
+                    <td class="link-align"><a href="{% url 'healthcare:approve' appointment.id %}" class="btn--confirm">Approve</a></td>
                     <td class="link-align"><a href="{% url 'healthcare:reject' appointment.id %}" class="btn--cancel">Reject</a></td>
                 </tr>
                 {% endfor %}
