@@ -17,29 +17,21 @@
     <div class="container dashboard--grid">
         <div class="dash">
             <img class="dashboard--img" src="{% static 'healthcare/img/main.jpg' %}" />
-            <div class="dash-btn">
-                <a class="btn" href="{% url 'healthcare:patient_appointments' %}">View Patient Appointments</a>
-            </div>
+            <a class="btn--dash" href="{% url 'healthcare:patient_appointments' %}">View Patient Appointments</a>
         </div>
         <div class="dash">
             <img class="dashboard--img" src="{% static 'healthcare/img/main.jpg' %}" />
-            <div class="dash-btn">
-                <a class="btn" href="{% url 'healthcare:doctor_profile' %}">Update Doctor Profile</a>
-            </div>
+            <a class="btn--dash" href="{% url 'healthcare:doctor_profile' %}">Update Doctor Profile</a>
         </div>
         {% if not doctor_data.has_schedule %}
         <div class="dash">
             <img class="dashboard--img" src="{% static 'healthcare/img/main.jpg' %}" />
-            <div class="dash-btn">
-                <a class="btn" href="{% url 'healthcare:create_schedule' %}">Create your Schedule</a>
-            </div>
+            <a class="btn--dash" href="{% url 'healthcare:create_schedule' %}">Create your Schedule</a>
         </div>
         {% else %}
         <div class="dash">
             <img class="dashboard--img" src="{% static 'healthcare/img/main.jpg' %}" />
-            <div class="dash-btn">
-                <a class="btn" href="{% url 'healthcare:update_schedule' %}">Update your Schedule</a>
-            </div>
+            <a class="btn--dash" href="{% url 'healthcare:update_schedule' %}">Update your Schedule</a>
         </div>
         {% endif %}
     </div>
@@ -51,28 +43,20 @@
     <div class="container dashboard--grid">
         <div class="dash">
             <img class="dashboard--img" src="{% static 'healthcare/img/main.jpg' %}" />
-            <div class="dash-btn">
-                <a class="btn" href="{% url 'healthcare:region' %}">Book an Appointment</a>
-            </div>
+            <a class="btn--dash" href="{% url 'healthcare:region' %}">Book an Appointment</a>
         </div>
         <div class="dash">
             <img class="dashboard--img" src="{% static 'healthcare/img/main.jpg' %}" />
-            <div class="dash-btn">
-                <a class="btn" href="{% url 'healthcare:user_profile' %}">Update Profile</a>
-            </div>
+            <a class="btn--dash" href="{% url 'healthcare:user_profile' %}">Update Profile</a>
         </div>
         <div class="dash">
             <img class="dashboard--img" src="{% static 'healthcare/img/main.jpg' %}" />
-            <div class="dash-btn">
-                <a class="btn" href="{% url 'healthcare:view_appointments' %}">View Appointments</a>
-            </div>
+            <a class="btn--dash" href="{% url 'healthcare:view_appointments' %}">View Appointments</a>
         </div>
         {% if check_doctor < 1 and check_application < 1 %}
         <div class="dash">
             <img class="dashboard--img" src="{% static 'healthcare/img/main.jpg' %}" />
-            <div class="dash-btn">
-                <a class="btn" href="{% url 'healthcare:careers' %}">Apply as a Doctor</a>
-            </div>
+            <a class="btn--dash" href="{% url 'healthcare:careers' %}">Apply as a Doctor</a>
         </div>
         {% endif %}
     </div>

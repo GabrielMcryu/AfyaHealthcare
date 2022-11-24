@@ -65,6 +65,11 @@ body {
   transition: all 0.3s;
 }
 
+.main-nav-link:hover,
+.main-nav-link:active {
+  color: #228be6;
+}
+
 .section-main {
     height: 85vh;
     background-image:linear-gradient(0deg,rgba(24,100,171, 0.3), rgba(24,100,171, 0.3)), url("/static/healthcare/img/main.jpg");
@@ -132,6 +137,13 @@ body {
 .btn--landing:link,
 .btn--landing:visited {
     background-color: #fff;
+}
+
+.btn--landing:hover,
+.btn--landing:active {
+    color: #fff;
+    background-color: #228be6;
+    box-shadow: 0 0 0 3px #fff
 }
 
 .footer {
@@ -212,8 +224,9 @@ body {
     text-align: left;
 }
 
-
-.submit-btn{
+.submit-btn,
+.submit-btn:link,
+.submit-btn:visited {
 	margin-top: 10px;
 	width: 100%;
 	padding-top: 10px;
@@ -223,6 +236,14 @@ body {
 	border:none;
     font-size: 1.8rem;
     font-weight: 700;
+    transition: all 0.3s;
+}
+
+.submit-btn:hover,
+.submit-btn:active {
+    background-color: #228be6;
+    color: #fff;
+    box-shadow: 0 0 0 3px #fff;
 }
 
 .page--section {
@@ -240,14 +261,50 @@ body {
 
 .dash {
     box-shadow: 0 2.4rem 4.8rem rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: all 0.4s;
+}
+
+.dash:hover {
+    transform: translateY(-1.2rem);
+    box-shadow: 0 3.2rem 6.4rem rgba(0, 0, 0, 0.075);
 }
 
 .dashboard--img {
+    display: block;
     width: 100%;
 }
 
 .dash-btn {
     text-align: center;
+}
+
+.dash-btn:hover {
+    cursor: pointer;
+    color: #fff;
+}
+
+.btn--dash,
+.btn--dash:link,
+.btn--dash:visited {
+    display: flex;
+    text-decoration: none;
+    justify-content: center;
+    background-color: #fff;
+    font-size: 2rem;
+    color: #228be6;
+    font-weight: 600;
+    padding: 1.6rem 3.2rem;
+
+    border: none;
+    font-family: inherit;
+    transition: all 0.3s;
+}
+
+.btn--dash:hover,
+.btn--dash:active {
+    background-color: #228be6;
+    color: #fff;
 }
 
 /* Table  */
@@ -341,6 +398,11 @@ body {
     transition: all 0.3s;
 }
 
+.btn--full:hover,
+.btn--full:active {
+    background-color: #1971c2;
+}
+
 .btn--cancel,
 .btn--cancel:link,
 .btn--cancel:visited {
@@ -361,6 +423,11 @@ body {
 
     /* Put transition on original "state" */
     transition: all 0.3s;
+}
+
+.btn--cancel:hover,
+.btn--cancel:active {
+    background-color: #c92a2a;
 }
 
 .btn--confirm,
@@ -385,6 +452,11 @@ body {
     transition: all 0.3s;
 }
 
+.btn--confirm:hover,
+.btn--confirm:active {
+    background-color: #2b8a3e;
+}
+
 .btn--update,
 .btn--update:link,
 .btn--update:visited {
@@ -392,7 +464,7 @@ body {
 
     text-decoration: none;
     font-size: 1.2rem;
-    background-color: #343a40;
+    background-color: #495057;
     color: #fff;
     font-weight: 600;
     padding: 1.6rem 3.2rem;
@@ -405,6 +477,11 @@ body {
 
     /* Put transition on original "state" */
     transition: all 0.3s;
+}
+
+.btn--update:hover,
+.btn--update:active {
+    background-color: #212529;
 }
 
 
