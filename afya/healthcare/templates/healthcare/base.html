@@ -27,9 +27,11 @@
             <ul class="main-nav-list">
                 {% if user.is_authenticated %}
                 <li><a class="main-nav-link" href="{% url 'healthcare:dashboard' %}">Dashboard</a></li>
+                <li><a class="main-nav-link" href="{% url 'healthcare:our_services' %}">Our Services</a></li>
                 <li><a class="main-nav-link" href="#">Logged in as {{user.username}}</a></li>
                 <li><a class="main-nav-link" href="/logout">Logout</a></li>
                 {% else %}
+                <li><a class="main-nav-link" href="{% url 'healthcare:our_services' %}">Our Services</a></li>
                 <li><a class="main-nav-link" href="/login">Login</a></li>
                 <li><a class="main-nav-link" href="/register">Sign Up</a></li>
                 {% endif %}

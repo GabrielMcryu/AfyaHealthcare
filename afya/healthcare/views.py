@@ -336,3 +336,6 @@ def updatePatientAppointmentView(request, id):
     filtered_schedule = appointment_availability(schedule_data)
     context = {'form': form, 'filtered_schedule': filtered_schedule}
     return render(request, 'healthcare/update_patient_appointment.html', context=context)
+
+def ourServicesView(request):
+    return render(request, 'healthcare/our_services.html')
