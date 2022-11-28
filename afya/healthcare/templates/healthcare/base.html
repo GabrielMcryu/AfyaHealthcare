@@ -8,6 +8,16 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@500&family=Roboto:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet"> 
+
+    <script
+      type="module"
+      src="https://unpkg.com/ionicons@5.4.0/dist/ionicons/ionicons.esm.js"
+    ></script>
+    <script
+      nomodule
+      src="https://unpkg.com/ionicons@5.4.0/dist/ionicons/ionicons.js"
+    ></script>
+
     {% load static %}
     <link rel="stylesheet" href="{% static 'healthcare/css/style.css' %}">
     <title>{% block title %}My Site{% endblock %}</title>
@@ -32,6 +42,7 @@
                 <li><a class="main-nav-link" href="/logout">Logout</a></li>
                 {% else %}
                 <li><a class="main-nav-link" href="{% url 'healthcare:our_services' %}">Our Services</a></li>
+                <li><a class="main-nav-link" href="#">View Doctors</a></li>
                 <li><a class="main-nav-link" href="/login">Login</a></li>
                 <li><a class="main-nav-link" href="/register">Sign Up</a></li>
                 {% endif %}

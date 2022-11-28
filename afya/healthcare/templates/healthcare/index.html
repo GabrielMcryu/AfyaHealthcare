@@ -1,14 +1,96 @@
 {% extends 'healthcare/base.html' %}
 {% block title %}Landing Page{% endblock %}
 {% block content %}
+{% load static %}
 
 <section class="section-main">
     <div class="container-head">
         <h1 class="heading">Afya</h1>
         <span class="subheading">Medical care</span>
         <div class="buttons">
-            <a class="btn btn--landing" href="#">Learn More</a>
+            <a class="btn btn--landing" href="#">View Doctors</a>
             <a class="btn btn--landing" href="/register">Sign Up</a>
+        </div>
+    </div>
+</section>
+<section class="section-mission">
+    <div class="container">
+        <div class="page--heading">
+            <h2 class="page--header">Our Mission</h2>
+        </div>
+        <p class="mission--text">Integer tristique, lacus in ullamcorper pharetra, ipsum risus commodo turpis, ut consequat nisl nisl euismod lorem. 
+            Fusce facilisis ex id justo consectetur faucibus. Fusce nec nisi vestibulum, euismod mi sed, placerat justo. Etiam sem ligula,
+            mattis quis tortor in, ultricies facilisis elit. Vestibulum ultrices erat erat, ut vestibulum leo posuere nec. Cras luctus aliquam elit, ac laoreet dui feugiat a. Ut eu suscipit quam. In hac habitasse platea dictumst. 
+        </p>
+    </div>
+    <div class="container grid grid--4-cols mission--padding">
+        <div class="features">
+            <ion-icon class="feature-icon" name="alarm-outline"></ion-icon>
+            <p class="feature-title">Less waiting time</p><br><br>
+            <p class="feature-text">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas vehicula odio mi.
+            </p>
+        </div>
+        <div class="features">
+            <ion-icon class="feature-icon" name="book-outline"></ion-icon>
+            <p class="feature-title">Easy booking process</p><br><br>
+            <p class="feature-text">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas vehicula odio mi.
+            </p>
+        </div>
+        <div class="features">
+            <ion-icon class="feature-icon" name="globe-outline"></ion-icon>
+            <p class="feature-title">Book anywhere, any place</p>
+            <p class="feature-text">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas vehicula odio mi.
+            </p>
+        </div>
+        <div class="features">
+            <ion-icon class="feature-icon" name="medkit-outline"></ion-icon>
+            <p class="feature-title">Access to professional doctors</p>
+            <p class="feature-text">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas vehicula odio mi.
+            </p>
+        </div>
+    </div>
+</section>
+<section class="section-testimonials">
+    <div class="page--heading">
+        <h2 class="page--header">Testimonials</h2>
+    </div>
+    <div class="container testimonials--grid">
+        <div class="testimonials">
+            <img class="testimonials--img" src="{% static 'healthcare/img/testimonials-1.jpg' %}" />
+            <p class="testimonials--text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas vehicula odio mi. 
+                Etiam tincidunt enim ligula, eget fermentum ante tincidunt tempor. </p>
+            <p class="testimonials--name">~ Jane Doe</p>
+        </div>
+        <div class="testimonials">
+            <img class="testimonials--img" src="{% static 'healthcare/img/testimonials-2.jpg' %}" />
+            <p class="testimonials--text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas vehicula odio mi.
+                 Etiam tincidunt enim ligula, eget fermentum ante tincidunt tempor. </p>
+            <p class="testimonials--name">~ John Doe</p>
+        </div>
+        <div class="testimonials">
+            <img class="testimonials--img" src="{% static 'healthcare/img/testimonials-3.jpg' %}" />
+            <p class="testimonials--text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas vehicula odio mi. 
+                Etiam tincidunt enim ligula, eget fermentum ante tincidunt tempor. </p>
+            <p class="testimonials--name">~ Sarah Smith</p>
+        </div>
+    </div>
+</section>
+
+<section class="section-doctors">
+    <div class="container">
+        <div class="doc">
+            <div class="doc--text-box">
+                <h2 class="doc--title">View Doctors</h2>
+                <p class="doc--text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas vehicula odio mi. </p>
+                <a class="btn btn--landing" href="#">View Doctors</a>
+            </div>
+            <div class="doc--img-box" role="img" aria-label="Doctor smiling">
+
+            </div>
         </div>
     </div>
 </section>

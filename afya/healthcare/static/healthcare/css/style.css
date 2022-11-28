@@ -631,3 +631,153 @@ body {
     font-size: 1.4rem;
     line-height: 1.4;
 }
+
+/* Mission section */
+.section-mission {
+    padding: 1.8rem 0 4.8rem 0;
+}
+
+.mission--heading {
+    padding-top: 4.8rem 0 2.4rem 0;
+}
+
+.mission--text {
+    font-size: 1.8rem;
+    text-align: center;
+    line-height: 1.4;
+}   
+
+/* Features section */
+.section-mission {
+    padding: 1.8rem 0 4.8rem 0;
+}
+
+.grid {
+    display: grid;
+    row-gap: 9.6rem;
+    column-gap: 6.4rem;
+  
+    /* margin-bottom: 9.6rem; */
+}
+
+.grid--4-cols {
+    grid-template-columns: repeat(4, 1fr);
+}
+
+
+.feature-icon {
+    color: #1864ab;
+    height: 3.2rem;
+    width: 3.2rem;
+    background-color: #a5d8ff;
+    margin-bottom: 3.2rem;
+    padding: 1.6rem;
+    border-radius: 50%;
+}
+
+
+.feature-title {
+    font-size: 2.4rem;
+    columns: #333;
+    font-weight: bold;
+    margin-bottom: 1.6rem;
+}
+
+.feature-text {
+    font-size: 1.8rem;
+    line-height: 1.8;
+}
+
+.mission--padding {
+    padding-top: 4.8rem;
+}
+
+/* Testimonials Section */
+
+.section-testimonials {
+    padding: 1.8rem 0 4.8rem 0;
+}
+
+.testimonials--grid {
+    padding-top: 2.4rem;
+    display: grid;
+    column-gap: 6.4rem;
+    row-gap: 6.4rem;
+    grid-template-columns: repeat(3, 1fr);
+}
+
+.testimonials {
+    box-shadow: 0 2.4rem 4.8rem rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: all 0.4s;
+}
+
+.testimonials:hover {
+    transform: translateY(-1.2rem);
+    box-shadow: 0 3.2rem 6.4rem rgba(0, 0, 0, 0.075);
+}
+
+.testimonials--img {
+    display: block;
+    width: 100%;
+    padding: 3.6rem;
+    border-radius: 50%;
+}
+
+.testimonials--text {
+    font-size: 1.8rem;
+    line-height: 1.8;
+    padding: 0 3.6rem 1.8rem 3.6rem;
+}
+
+.testimonials--name {
+    font-size: 1.4rem;
+    padding: 0 3.6rem 3.6rem 3.6rem;
+    color: #adb5bd;
+}
+
+/* Doctor's Section */
+.section-doctors {
+    padding: 6.4rem 0 4.8rem 0;
+}
+
+.doc {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    /* background-color: #e67e22; */
+    box-shadow: 0 2.4rem 4.8rem rgba(0, 0, 0, 0.15);
+    border-radius: 11px;
+    column-gap: 4.8rem;
+    row-gap: 4.8rem;
+    background-image: linear-gradient(to right bottom, #1e67ac, #1864ab);
+    overflow: hidden;  
+}
+
+.doc--text-box {
+    padding: 4.8rem 6.4rem 6.4rem 6.4rem;
+    color: #fff;
+}
+
+.doc--title {
+    /* text-align: center; */
+    font-size: 3.6rem;
+    color: #fff;
+    padding: 3.2rem 0 1.8rem 0;
+}
+
+.doc--text {
+    font-size: 1.8rem;
+    line-height: 1.8;
+    padding-bottom: 1.8rem;
+}
+
+.doc--img-box {
+    background-image: linear-gradient(
+        to right bottom,
+        rgba(78, 204, 235, 0.35),
+        rgba(34, 125, 230, 0.35)
+      ),
+      url("/static/healthcare/img/view-doctor.jpg");
+    background-size: cover;
+    background-position: center;
+  }
