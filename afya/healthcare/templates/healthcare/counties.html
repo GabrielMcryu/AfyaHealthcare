@@ -1,0 +1,30 @@
+{% extends 'healthcare/base.html' %}
+{% block title %}Region{% endblock %}
+{% block content %}
+
+<section class="page--section">
+    <div class="container--head">
+        <h2 class="page--heading">Select County</h2>
+    </div>
+
+    <div class="container table">
+        <table class="t--style-r">
+            <thead>
+                <tr>
+                    <th>County</th>
+                    <th> </th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for region in all_regions %}
+                <tr>
+                    <td class="td-normal">{{region.county}}</td>
+                    <td class="link-align-r"><a href="{% url 'healthcare:county_doctors' region.id %}" class="btn--full">View</a></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</section> 
+
+{% endblock %}

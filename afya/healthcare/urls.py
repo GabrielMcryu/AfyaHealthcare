@@ -26,5 +26,7 @@ urlpatterns = [
     path('careers/', views.doctorApplicationView, name='careers'),
     path('update_appointment/<int:id>', views.updateAppointmentView, name='update_appointment'),
     path('update_patient_appointment/<int:id>', views.updatePatientAppointmentView, name='update_patient_appointment'),
-    path('our_services/', views.ourServicesView, name='our_services')
+    path('our_services/', views.ourServicesView, name='our_services'),
+    path('counties/', views.countiesView, name='counties'),
+    path('county_doctors/<int:id>', views.countyDoctorView, name='county_doctors'),
 ]

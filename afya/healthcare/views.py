@@ -73,7 +73,6 @@ def all_doctors_view(request, id):
         }
     return render(request, 'healthcare/view_doctors.html', context=context)
 
-@login_required(login_url='/login')
 def doctorView(request, id):
     doctor_data = DoctorProfile.objects.get(id=id)
     context = {'doctor_data': doctor_data}
@@ -339,3 +338,21 @@ def updatePatientAppointmentView(request, id):
 
 def ourServicesView(request):
     return render(request, 'healthcare/our_services.html')
+
+def countiesView(request):
+    all_regions = Region.objects.all()
+    my_data = [1, 2, 3]
+    context = {
+        'all_regions': all_regions,
+        'my_data': my_data,
+    }
+    return render(request, 'healthcare/counties.html', context=context)
+
+def countyDoctorView(request, id):
+    region_id = id
+    doctor_list = DoctorProfile.objects.filter(county=region_id).order_by('specialization')
+    context = {
+        'doctor_list': doctor_list, 
+    }
+    return render(request, 'healthcare/county_doctor.html', context=context)
+
