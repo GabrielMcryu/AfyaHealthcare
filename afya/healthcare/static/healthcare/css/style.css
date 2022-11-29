@@ -179,12 +179,16 @@ body {
     padding-top: 4.8rem;
 }
 
+.service--padding {
+    padding-top: 3.6rem;
+}
+
 .page--sub-header {
     text-align: center;
     font-size: 2.9rem;
     color: #228be6;
     padding-top: 4.8rem;
-    padding-bottom: 3.2rem;
+    padding-bottom: 1.2rem;
     padding-left: 0;
     padding-right: 0
 
@@ -230,6 +234,11 @@ body {
     border: 1px solid #e7f5ff;
     margin-bottom: 1.2rem;
     text-align: left;
+}
+
+.input-field:focus {
+    outline-style: solid;
+    outline-color: #1864ab;
 }
 
 .submit-btn,
@@ -317,7 +326,7 @@ body {
 
 /* Table  */
 .table {
-    padding: 3.2rem 9.6rem;
+    padding: 4.8rem 9.6rem;
 }
 
 .t--style {
@@ -781,3 +790,20 @@ body {
     background-size: cover;
     background-position: center;
   }
+
+.container--head {
+    padding: 0 3.2rem;
+    margin: 0 auto;
+    background-color: #1c7ed6;
+}
+
+.page--heading {
+    text-align: center;
+    font-size: 3.6rem;
+    color: #fff;
+    padding: 3.2rem 0;
+}
+
+.head--width {
+    max-width: 60rem;
+}
