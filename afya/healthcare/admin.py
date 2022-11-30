@@ -28,7 +28,6 @@ class UserProfileAdmin(admin.ModelAdmin):
         return obj.user.username
 
 
-
 class DoctorProfileAdmin(admin.ModelAdmin):
     model = DoctorProfile
     # fields = ['id', ]
