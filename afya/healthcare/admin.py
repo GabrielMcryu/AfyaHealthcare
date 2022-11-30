@@ -21,8 +21,6 @@ class AccountsUserAdmin(AuthUserAdmin):
         return super(AccountsUserAdmin, self).change_view(*args, **kwargs)
 
 class UserProfileAdmin(admin.ModelAdmin):
-    # readonly_fields = ['id', 'user_id']
-    # fields = ['id', 'phone', 'gender', 'birth_date', 'user_id']
     autocomplete_fields = ['user_id']
     list_display = ['id', 'user_name', 'phone', 'birth_date', 'user_id']
 

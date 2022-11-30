@@ -4,7 +4,7 @@ from datetime import datetime
 from django.contrib.auth.models import Group
 from .emails import applicationEmail
 
-# Create your models here.
+# UserProfile Model
 class UserProfile(models.Model):
     Gender_MALE = 'Male'
     GENDER_FEMALE = 'Female'
@@ -22,7 +22,7 @@ class UserProfile(models.Model):
     def __str__(self):
         return self.user.first_name
 
-
+# Counties Model
 class Region(models.Model):
     COUNTY_NAIROBI = 'Nairobi'
     COUNTY_MOMBASA = 'Mombasa'
@@ -37,6 +37,7 @@ class Region(models.Model):
     def __str__(self):
         return self.county
 
+# DoctorProfile Model
 class DoctorProfile(models.Model):
     S_DERMATOLOGY = 'Dermatology'
     S_FAMILY_MEDICINE = 'Family Medicine'
@@ -71,6 +72,7 @@ class DoctorProfile(models.Model):
     def __str__(self):
         return self.user.first_name
 
+# Appointments Model
 class Appointment(models.Model):
     STATUS_PENDING = 'Pending'
     STATUS_APPROVED = 'Approved'
@@ -96,6 +98,7 @@ class Appointment(models.Model):
     def __str__(self):
         return f'Appointment {self.created_at}'
 
+# Schedule Model
 class Schedule(models.Model):
     AVAILABILITY_CHOICES = [
         ('Available', 'Available'),
@@ -114,6 +117,7 @@ class Schedule(models.Model):
     def __str__(self):
         return f'Schedule for {self.doctor.user.first_name}'
 
+# Doctor Application Model
 class DoctorApplication(models.Model):
     S_DERMATOLOGY = 'Dermatology'
     S_FAMILY_MEDICINE = 'Family Medicine'
@@ -158,6 +162,7 @@ class DoctorApplication(models.Model):
     def __str__(self):
         return f'Application for {self.user.first_name}'
 
+    # Creates Doctor Profile Instance on Approved, Deletes Doctor Application instance on Rejected
     def save(self, *args, **kwargs):
         if self.status == 'Approved':
             doctor_data = DoctorProfile.objects.create(user=self.user, specialization=self.specialization, county=self.county, biography=self.biography)

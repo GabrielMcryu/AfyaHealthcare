@@ -6,12 +6,15 @@ from .models import UserProfile, Region, DoctorProfile, Appointment, Schedule
 from .emails import sendEmail
 from .myfunctions import appointment_availability
 
-# Create your views here.
+# View for User registration
 def registerView(request):
     if request.method == 'POST':
         form = UserRegistrationForm(request.POST)
         if form.is_valid():
+            # save data to User model
             form.save()
+
+            # save data to UserProfile Model
             username = form.cleaned_data.get('username')
             phone = form.cleaned_data.get('phone')
             gender = form.cleaned_data.get('gender')
@@ -25,12 +28,15 @@ def registerView(request):
         form = UserRegistrationForm()
     return render(request, 'registration/register.html', {'form': form})
 
+# Landing page View
 def indexView(request):
     return render(request, 'healthcare/index.html')
 
+# Dashboard View
 @login_required(login_url='/login')
 def dashBoardView(request):
     user_data = request.user
+    # Sends model data depending on which type of User group in session
     check_doctor = DoctorProfile.objects.filter(user=user_data).count()
     check_application = DoctorApplication.objects.filter(user=user_data).count()
     if check_doctor > 0:
@@ -47,6 +53,7 @@ def dashBoardView(request):
         }
     return render(request, 'healthcare/dashboard.html', context=context)
 
+# Region View for authenticated users
 @login_required(login_url='/login')
 def regionView(request):
     all_regions = Region.objects.all()
@@ -58,6 +65,7 @@ def regionView(request):
 
     return render(request, 'healthcare/region.html', context=context)
 
+# Doctors View according to county for authenticated users
 @login_required(login_url='/login')
 def all_doctors_view(request, id):
     region_id = id
@@ -73,11 +81,13 @@ def all_doctors_view(request, id):
         }
     return render(request, 'healthcare/view_doctors.html', context=context)
 
+# Doctor View
 def doctorView(request, id):
     doctor_data = DoctorProfile.objects.get(id=id)
     context = {'doctor_data': doctor_data}
     return render(request, 'healthcare/view_doctor.html', context=context)
 
+# Update UserProfile View
 @login_required(login_url='/login')
 def updateUserProfileView(request):
     current_user = request.user
@@ -85,12 +95,15 @@ def updateUserProfileView(request):
     form = UpdateUserForm(request.POST or None, instance=current_user)
     user_form = UpdateUserProfileForm(request.POST or None, instance=user_profile)
     if form.is_valid() and user_form.is_valid():
+        # saves data to User model
         form.save()
+        # saves data to UserProfile model
         user_form.save()
         return redirect('/dashboard/')
     context = {'form': form, 'user_form': user_form}
     return render(request, 'healthcare/user_profile.html', context=context)
 
+# Update DoctorProfile View
 @login_required(login_url='/login')
 @permission_required('healthcare.view_region', raise_exception=True)
 def updateDoctorProfileView(request):
@@ -103,6 +116,7 @@ def updateDoctorProfileView(request):
     context = {'form': form }
     return render(request, 'healthcare/doctor_profile.html', context=context)
 
+# Book Appointment View
 @login_required(login_url='\login')
 def bookAppointmentView(request, id):
     schedule_data = {}
@@ -119,6 +133,7 @@ def bookAppointmentView(request, id):
         return render(request, 'healthcare/dashboard.html')
     else:
         form = BookAppointmentForm()
+    # get doctor Schedule
     doctor_schedule = Schedule.objects.get(doctor=doctor)
     schedule_data['monday'] = doctor_schedule.monday
     schedule_data['tuesday'] = doctor_schedule.tuesday
@@ -131,6 +146,7 @@ def bookAppointmentView(request, id):
     context = {'form': form, 'filtered_schedule': filtered_schedule}
     return render(request, 'healthcare/book_appointment.html', context=context)
 
+# View Appointments
 @login_required(login_url='\login')
 def viewAppointmentsView(request):
     user_session = request.user
@@ -145,12 +161,14 @@ def viewAppointmentsView(request):
         }
     return render(request, 'healthcare/view_appointments.html', context=context)
 
+# View Appointment
 @login_required(login_url='\login')
 def viewAppointmentView(request, id):
     appointment_data = Appointment.objects.get(id=id)
     context = {'appointment_data': appointment_data}
     return render(request, 'healthcare/view_appointment.html', context=context)
 
+# View Patient Appointments data
 @login_required(login_url='/login')
 @permission_required('healthcare.view_region', raise_exception=True)
 def patientAppointmentsView(request):
@@ -166,6 +184,7 @@ def patientAppointmentsView(request):
     }
     return render(request, 'healthcare/patient_appointments.html', context=context)
 
+# View Patient Appointment data
 @login_required(login_url='/login')
 @permission_required('healthcare.view_region', raise_exception=True)
 def patientAppointmentView(request, id):
@@ -173,6 +192,7 @@ def patientAppointmentView(request, id):
     context = {'appointment_data': appointment_data}
     return render(request, 'healthcare/patient_appointment.html', context=context)
 
+# Approve Appointment View
 @login_required(login_url='/login')
 @permission_required('healthcare.view_region', raise_exception=True)
 def approveAppointment(request, id):
@@ -191,11 +211,13 @@ def approveAppointment(request, id):
     if form.is_valid():
         date = form.cleaned_data.get('appointment_date')
         form.save()
+        # send Email to user
         sendEmail(user_email, email_header, doctor_data, symptoms, date)
         return redirect('/dashboard/')
     schedule_data = {}
     user = request.user
     doctor = DoctorProfile.objects.get(user=user)
+    # get doctor schedule
     doctor_schedule = Schedule.objects.get(doctor=doctor)
     schedule_data['monday'] = doctor_schedule.monday
     schedule_data['tuesday'] = doctor_schedule.tuesday
@@ -208,6 +230,7 @@ def approveAppointment(request, id):
     context = {'form': form, 'filtered_schedule': filtered_schedule}
     return render(request, 'healthcare/approve.html', context=context)
 
+# Reject Appointment View
 @login_required(login_url='/login')
 @permission_required('healthcare.view_region', raise_exception=True)
 def rejectAppointment(request, id):
@@ -219,6 +242,7 @@ def rejectAppointment(request, id):
     context = {'form': form}
     return render(request, 'healthcare/reject.html', context=context)
 
+# Complete Appointment View
 @login_required(login_url='/login')
 @permission_required('healthcare.view_region', raise_exception=True)
 def completeAppointment(request, id):
@@ -230,6 +254,7 @@ def completeAppointment(request, id):
     context = {'form': form}
     return render(request, 'healthcare/finish.html', context=context)
 
+# Cancel Appointment View
 @login_required(login_url='/login')
 def cancelAppointment(request, id):
     appointment_data = Appointment.objects.get(id=id)
@@ -240,6 +265,7 @@ def cancelAppointment(request, id):
     context = {'form': form}
     return render(request, 'healthcare/cancel.html', context=context)
 
+# Create Schedule View
 @login_required(login_url='/login')
 @permission_required('healthcare.view_region', raise_exception=True)
 def createScheduleView(request):
@@ -264,6 +290,7 @@ def createScheduleView(request):
         form = CreateScheduleForm()
     return render(request, 'healthcare/create_schedule.html', {'form': form})
 
+# Update Schedule View
 @login_required(login_url='/login')
 @permission_required('healthcare.view_region', raise_exception=True)
 def updateScheduleView(request):
@@ -277,6 +304,7 @@ def updateScheduleView(request):
     context = {'form': form}
     return render(request, 'healthcare/update_schedule.html', context=context)
 
+# Doctor Application View
 @login_required(login_url='/login')
 def doctorApplicationView(request):
     user_data = request.user
@@ -293,6 +321,7 @@ def doctorApplicationView(request):
         form = DoctorApplicationForm()
     return render(request, 'healthcare/careers.html', {'form': form})
 
+# Update Appointement View
 @login_required(login_url='/login')
 def updateAppointmentView(request, id):
     schedule_data = {}
@@ -303,6 +332,7 @@ def updateAppointmentView(request, id):
         form.save()
         return redirect('/dashboard/')
     doctor_schedule = Schedule.objects.get(doctor=doctor)
+    # get doctor schedule
     schedule_data['monday'] = doctor_schedule.monday
     schedule_data['tuesday'] = doctor_schedule.tuesday
     schedule_data['wednesday'] = doctor_schedule.wednesday
@@ -314,6 +344,7 @@ def updateAppointmentView(request, id):
     context = {'form': form, 'filtered_schedule': filtered_schedule}
     return render(request, 'healthcare/update_appointment.html', context=context)
 
+# Update Appointment View as Doctor
 @login_required(login_url='/login')
 def updatePatientAppointmentView(request, id):
     schedule_data = {}
@@ -336,9 +367,11 @@ def updatePatientAppointmentView(request, id):
     context = {'form': form, 'filtered_schedule': filtered_schedule}
     return render(request, 'healthcare/update_patient_appointment.html', context=context)
 
+# Our Services View
 def ourServicesView(request):
     return render(request, 'healthcare/our_services.html')
 
+# Counties View for unauthenticated users
 def countiesView(request):
     all_regions = Region.objects.all()
     my_data = [1, 2, 3]
@@ -348,6 +381,7 @@ def countiesView(request):
     }
     return render(request, 'healthcare/counties.html', context=context)
 
+# Doctor View by county for unauthenticated users
 def countyDoctorView(request, id):
     region_id = id
     doctor_list = DoctorProfile.objects.filter(county=region_id).order_by('specialization')

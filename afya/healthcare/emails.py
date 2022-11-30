@@ -1,6 +1,7 @@
 from django.core.mail import EmailMessage
 from django.conf import settings
 
+# Send email for appointments
 def sendEmail(user_email, email_header, doctor_data, symptoms, date):
     my_email = user_email
     print(my_email)
@@ -17,6 +18,7 @@ def sendEmail(user_email, email_header, doctor_data, symptoms, date):
     email.fail_silently = True
     email.send()
 
+# Send email for the doctor application
 def applicationEmail(user_email, email_header, email_body):
     my_email = user_email
     print(my_email)

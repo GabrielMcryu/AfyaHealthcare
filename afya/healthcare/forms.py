@@ -4,6 +4,7 @@ from django.contrib.auth.models import User
 from django.forms import ModelForm
 from .models import UserProfile, DoctorProfile, Appointment, Schedule, DoctorApplication
 
+# User Registration Form
 class UserRegistrationForm(UserCreationForm):
     GENDER_CHOICES = [
         ('Male', 'Male'),
@@ -11,7 +12,6 @@ class UserRegistrationForm(UserCreationForm):
     ]
 
     YEARS= [x for x in range(1940,2021)]
-    # years=YEARS
 
     username = forms.CharField(
         max_length=200,
@@ -41,6 +41,7 @@ class UserRegistrationForm(UserCreationForm):
         self.fields['first_name'].widget.attrs.update({'class': 'input-field', 'placeholder': 'Enter First Name'})
         self.fields['last_name'].widget.attrs.update({'class': 'input-field', 'placeholder': 'Enter Last Name'})
 
+# Update User Form
 class UpdateUserForm(UserChangeForm):
     password = None
     username = forms.CharField(
@@ -58,6 +59,7 @@ class UpdateUserForm(UserChangeForm):
         self.fields['first_name'].widget.attrs.update({'class': 'input-field', 'placeholder': 'Enter First Name'})
         self.fields['last_name'].widget.attrs.update({'class': 'input-field', 'placeholder': 'Enter Last Name'})
 
+# Update UserProfile Form
 class UpdateUserProfileForm(ModelForm):
     GENDER_CHOICES = [
         ('Male', 'Male'),
@@ -79,6 +81,7 @@ class UpdateUserProfileForm(ModelForm):
         model = UserProfile
         fields = ['phone', 'gender', 'birth_date']
 
+# Update DoctorProfile Form
 class UpdateDoctorProfileForm(ModelForm):
     SPECIALIZATION_CHOICES = [
         ('Dermatology', 'Dermatology'),
@@ -106,6 +109,7 @@ class UpdateDoctorProfileForm(ModelForm):
         self.fields['county'].widget.attrs.update({'class': 'input-field',})
         self.fields['biography'].widget.attrs.update({'class': 'input-field', 'cols': '30', 'rows': '10'})
 
+# Book Appointment Form
 class BookAppointmentForm(ModelForm):
     appointment_date = forms.CharField(widget=forms.TextInput(attrs={'id':'appointment_date', 'class': 'input-field', 'placeholder': 'Enter Date', 'autocomplete': 'off'}), required=True)
     symptoms = forms.Textarea()
@@ -118,6 +122,7 @@ class BookAppointmentForm(ModelForm):
         super().__init__(*args, **kwargs)
         self.fields['symptoms'].widget.attrs.update({'class': 'input-field', 'cols': '30', 'rows': '10'})
 
+# Approve Appointment Form
 class ApproveAppointmentForm(ModelForm):
     STATUS_CHOICE = [
         ('Approved', 'Approved'),
@@ -135,6 +140,7 @@ class ApproveAppointmentForm(ModelForm):
         super().__init__(*args, **kwargs)
         self.fields['status'].widget.attrs.update({'class': 'input-field'})
 
+# Reject Appointment Form
 class RejectAppointmentForm(ModelForm):
     STATUS_CHOICE = [
         ('Rejected', 'Rejected')
@@ -150,6 +156,7 @@ class RejectAppointmentForm(ModelForm):
         super().__init__(*args, **kwargs)
         self.fields['status'].widget.attrs.update({'class': 'input-field'})
 
+# Complete Appointment Form
 class CompleteAppointmentForm(ModelForm):
     STATUS_CHOICE = [
         ('Completed', 'Completed')
@@ -165,6 +172,7 @@ class CompleteAppointmentForm(ModelForm):
         super().__init__(*args, **kwargs)
         self.fields['status'].widget.attrs.update({'class': 'input-field'})
 
+# Cancel Appointment Form
 class CancelAppointmentForm(ModelForm):
     STATUS_CHOICE = [
         ('Cancelled', 'Cancelled')
@@ -179,7 +187,8 @@ class CancelAppointmentForm(ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.fields['status'].widget.attrs.update({'class': 'input-field'})
-    
+
+# Update Appointment Form    
 class UpdateAppointmentForm(ModelForm):
     appointment_date = forms.CharField(widget=forms.TextInput(attrs={'id':'appointment_date', 'class': 'input-field'}), required=True)
     symptoms = forms.Textarea()
@@ -192,6 +201,7 @@ class UpdateAppointmentForm(ModelForm):
         super().__init__(*args, **kwargs)
         self.fields['symptoms'].widget.attrs.update({'class': 'input-field', 'cols': '30', 'rows': '10'})
 
+# Update Appointment Form from Doctors View
 class UpdatePatientAppointmentForm(ModelForm):
     appointment_date = forms.CharField(widget=forms.TextInput(attrs={'id':'appointment_date', 'class': 'input-field'}), required=True)
 
@@ -199,6 +209,7 @@ class UpdatePatientAppointmentForm(ModelForm):
         model = Appointment
         fields = ['appointment_date']
 
+# Create Doctor Schedule Form
 class CreateScheduleForm(ModelForm):
     STATUS_CHOICE = [
         ('Available', 'Available'),
@@ -227,6 +238,7 @@ class CreateScheduleForm(ModelForm):
         self.fields['saturday'].widget.attrs.update({'class': 'input-field'})
         self.fields['sunday'].widget.attrs.update({'class': 'input-field'})
 
+# Doctor Application form
 class DoctorApplicationForm(ModelForm):
     SPECIALIZATION_CHOICES = [
         ('Dermatology', 'Dermatology'),

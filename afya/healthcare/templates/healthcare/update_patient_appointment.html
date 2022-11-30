@@ -6,6 +6,7 @@
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
 
+<!-- Update Patient appointment form -->
 <section class="section--form">
     <div class="form--container">
         <h2 class="page--header">Update Appointment</h2>
@@ -19,6 +20,7 @@
 
 {{ filtered_schedule|json_script:"filtered_schedule" }}
 <script>
+    // Adds calender with doctor schedule
     const filteredSchedule = JSON.parse(document.getElementById('filtered_schedule').textContent);
     console.log(filteredSchedule)
 

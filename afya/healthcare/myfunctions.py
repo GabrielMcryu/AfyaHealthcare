@@ -1,3 +1,4 @@
+# Checks the doctor schedule data which days they are available or unavailable
 def appointment_availability(schedule_data):
     available = []
     for schedule in schedule_data:
