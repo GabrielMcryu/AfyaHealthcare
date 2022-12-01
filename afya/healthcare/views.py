@@ -196,8 +196,8 @@ def patientAppointmentView(request, id):
 @login_required(login_url='/login')
 @permission_required('healthcare.view_region', raise_exception=True)
 def approveAppointment(request, id):
-    email_header = 'Your appointment has been approved!'
     appointment_data = Appointment.objects.get(id=id)
+    email_header = 'Your appointment has been approved!'
     user_email = appointment_data.user.user.email
     doctor_data = {}
     doctor_first_name = appointment_data.doctor.user.first_name
@@ -207,12 +207,13 @@ def approveAppointment(request, id):
     doctor_data['first_name'] = doctor_first_name
     doctor_data['last_name'] = doctor_last_name
     doctor_data['specialization'] = doctor_specialization
+    appointment_status = "approved"
     form = ApproveAppointmentForm(request.POST or None, instance=appointment_data)
     if form.is_valid():
         date = form.cleaned_data.get('appointment_date')
         form.save()
         # send Email to user
-        sendEmail(user_email, email_header, doctor_data, symptoms, date)
+        sendEmail(user_email, email_header, doctor_data, symptoms, date, appointment_status)
         return redirect('/dashboard/')
     schedule_data = {}
     user = request.user
@@ -235,9 +236,22 @@ def approveAppointment(request, id):
 @permission_required('healthcare.view_region', raise_exception=True)
 def rejectAppointment(request, id):
     appointment_data = Appointment.objects.get(id=id)
+    email_header = 'Your appointment has been rejected'
+    user_email = appointment_data.user.user.email
+    doctor_data = {}
+    doctor_first_name = appointment_data.doctor.user.first_name
+    doctor_last_name = appointment_data.doctor.user.last_name
+    doctor_specialization = appointment_data.doctor.specialization
+    date = appointment_data.appointment_date
+    symptoms = appointment_data.symptoms
+    doctor_data['first_name'] = doctor_first_name
+    doctor_data['last_name'] = doctor_last_name
+    doctor_data['specialization'] = doctor_specialization
+    appointment_status = "rejected"
     form = RejectAppointmentForm(request.POST or None, instance=appointment_data)
     if form.is_valid():
         form.save()
+        sendEmail(user_email, email_header, doctor_data, symptoms, date, appointment_status)
         return redirect('/dashboard/')
     context = {'form': form}
     return render(request, 'healthcare/reject.html', context=context)
@@ -247,9 +261,22 @@ def rejectAppointment(request, id):
 @permission_required('healthcare.view_region', raise_exception=True)
 def completeAppointment(request, id):
     appointment_data = Appointment.objects.get(id=id)
+    email_header = 'Your appointment has been completed'
+    user_email = appointment_data.user.user.email
+    doctor_data = {}
+    doctor_first_name = appointment_data.doctor.user.first_name
+    doctor_last_name = appointment_data.doctor.user.last_name
+    doctor_specialization = appointment_data.doctor.specialization
+    date = appointment_data.appointment_date
+    symptoms = appointment_data.symptoms
+    doctor_data['first_name'] = doctor_first_name
+    doctor_data['last_name'] = doctor_last_name
+    doctor_data['specialization'] = doctor_specialization
+    appointment_status = "completed"
     form = CompleteAppointmentForm(request.POST or None, instance=appointment_data)
     if form.is_valid():
         form.save()
+        sendEmail(user_email, email_header, doctor_data, symptoms, date, appointment_status)
         return redirect('/dashboard/')
     context = {'form': form}
     return render(request, 'healthcare/finish.html', context=context)
@@ -258,9 +285,22 @@ def completeAppointment(request, id):
 @login_required(login_url='/login')
 def cancelAppointment(request, id):
     appointment_data = Appointment.objects.get(id=id)
+    email_header = 'Your appointment has been cancelled'
+    user_email = appointment_data.user.user.email
+    doctor_data = {}
+    doctor_first_name = appointment_data.doctor.user.first_name
+    doctor_last_name = appointment_data.doctor.user.last_name
+    doctor_specialization = appointment_data.doctor.specialization
+    date = appointment_data.appointment_date
+    symptoms = appointment_data.symptoms
+    doctor_data['first_name'] = doctor_first_name
+    doctor_data['last_name'] = doctor_last_name
+    doctor_data['specialization'] = doctor_specialization
+    appointment_status = "cancelled"
     form = CancelAppointmentForm(request.POST or None, instance=appointment_data)
     if form.is_valid():
         form.save()
+        sendEmail(user_email, email_header, doctor_data, symptoms, date, appointment_status)
         return redirect('/dashboard/')
     context = {'form': form}
     return render(request, 'healthcare/cancel.html', context=context)
@@ -349,11 +389,24 @@ def updateAppointmentView(request, id):
 def updatePatientAppointmentView(request, id):
     schedule_data = {}
     appointment_data = Appointment.objects.get(id=id)
+    email_header = 'Your appointment has been updated!'
+    user_email = appointment_data.user.user.email
+    doctor_data = {}
+    doctor_first_name = appointment_data.doctor.user.first_name
+    doctor_last_name = appointment_data.doctor.user.last_name
+    doctor_specialization = appointment_data.doctor.specialization
+    symptoms = appointment_data.symptoms
+    doctor_data['first_name'] = doctor_first_name
+    doctor_data['last_name'] = doctor_last_name
+    doctor_data['specialization'] = doctor_specialization
+    appointment_status = "updated"
     user_data = request.user
     doctor = DoctorProfile.objects.get(user=user_data)
     form = UpdatePatientAppointmentForm(request.POST or None, instance=appointment_data)
     if form.is_valid():
+        date = form.cleaned_data.get('appointment_date')
         form.save()
+        sendEmail(user_email, email_header, doctor_data, symptoms, date, appointment_status)
         return redirect('/dashboard/')
     doctor_schedule = Schedule.objects.get(doctor=doctor)
     schedule_data['monday'] = doctor_schedule.monday
