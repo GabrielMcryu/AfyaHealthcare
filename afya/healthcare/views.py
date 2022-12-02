@@ -5,6 +5,9 @@ from .forms import *
 from .models import UserProfile, Region, DoctorProfile, Appointment, Schedule
 from .emails import sendEmail
 from .myfunctions import appointment_availability
+from django.contrib import messages
+from django.contrib.messages.views import SuccessMessageMixin
+from django.contrib.auth.views import LoginView
 
 # View for User registration
 def registerView(request):
@@ -23,7 +26,8 @@ def registerView(request):
             user = User.objects.get(username=username)
             user_data = UserProfile.objects.create(user=user, phone=phone, gender=gender, birth_date=birth_date)
             user_data.save()
-            return render(request, 'healthcare/index.html')
+            messages.success(request, 'You have successfully registered')
+            return redirect('/')
     else:
         form = UserRegistrationForm()
     return render(request, 'registration/register.html', {'form': form})
@@ -99,6 +103,7 @@ def updateUserProfileView(request):
         form.save()
         # saves data to UserProfile model
         user_form.save()
+        messages.success(request, 'You have successfully updated')
         return redirect('/dashboard/')
     context = {'form': form, 'user_form': user_form}
     return render(request, 'healthcare/user_profile.html', context=context)
@@ -112,6 +117,7 @@ def updateDoctorProfileView(request):
     form = UpdateDoctorProfileForm(request.POST or None, instance=doctor_profile)
     if form.is_valid():
         form.save()
+        messages.success(request, 'You have successfully updated')
         return redirect('/dashboard/')
     context = {'form': form }
     return render(request, 'healthcare/doctor_profile.html', context=context)
@@ -130,7 +136,8 @@ def bookAppointmentView(request, id):
         symptoms = form.cleaned_data.get('symptoms')
         appointment_data = Appointment.objects.create(appointment_date=appointment_date, symptoms=symptoms, user=user, doctor=doctor)
         appointment_data.save()
-        return render(request, 'healthcare/dashboard.html')
+        messages.success(request, 'You have successfully booked an appointment')
+        return redirect('/dashboard/')
     else:
         form = BookAppointmentForm()
     # get doctor Schedule
@@ -214,6 +221,7 @@ def approveAppointment(request, id):
         form.save()
         # send Email to user
         sendEmail(user_email, email_header, doctor_data, symptoms, date, appointment_status)
+        messages.success(request, 'You have approved an appointment')
         return redirect('/dashboard/')
     schedule_data = {}
     user = request.user
@@ -252,6 +260,7 @@ def rejectAppointment(request, id):
     if form.is_valid():
         form.save()
         sendEmail(user_email, email_header, doctor_data, symptoms, date, appointment_status)
+        messages.warning(request, 'You have rejected an appointment')
         return redirect('/dashboard/')
     context = {'form': form}
     return render(request, 'healthcare/reject.html', context=context)
@@ -277,6 +286,7 @@ def completeAppointment(request, id):
     if form.is_valid():
         form.save()
         sendEmail(user_email, email_header, doctor_data, symptoms, date, appointment_status)
+        messages.success(request, 'You have completed an appointment')
         return redirect('/dashboard/')
     context = {'form': form}
     return render(request, 'healthcare/finish.html', context=context)
@@ -301,6 +311,7 @@ def cancelAppointment(request, id):
     if form.is_valid():
         form.save()
         sendEmail(user_email, email_header, doctor_data, symptoms, date, appointment_status)
+        messages.warning(request, 'You have cancelled an appointment')
         return redirect('/dashboard/')
     context = {'form': form}
     return render(request, 'healthcare/cancel.html', context=context)
@@ -325,6 +336,7 @@ def createScheduleView(request):
             schedule_data.save()
             doctor_data.has_schedule = True
             doctor_data.save()
+            messages.success(request, 'You have created your schedule')
             return redirect('/dashboard/')
     else:
         form = CreateScheduleForm()
@@ -340,6 +352,7 @@ def updateScheduleView(request):
     form = CreateScheduleForm(request.POST or None, instance=schedule_data)
     if form.is_valid():
         form.save()
+        messages.success(request, 'You have updated your schedule')
         return redirect('/dashboard/')
     context = {'form': form}
     return render(request, 'healthcare/update_schedule.html', context=context)
@@ -370,6 +383,7 @@ def updateAppointmentView(request, id):
     form = UpdateAppointmentForm(request.POST or None, instance=appointment_data)
     if form.is_valid():
         form.save()
+        messages.success(request, 'You have updated an appointment')
         return redirect('/dashboard/')
     doctor_schedule = Schedule.objects.get(doctor=doctor)
     # get doctor schedule
@@ -407,6 +421,7 @@ def updatePatientAppointmentView(request, id):
         date = form.cleaned_data.get('appointment_date')
         form.save()
         sendEmail(user_email, email_header, doctor_data, symptoms, date, appointment_status)
+        messages.success(request, 'You have updated an appointment')
         return redirect('/dashboard/')
     doctor_schedule = Schedule.objects.get(doctor=doctor)
     schedule_data['monday'] = doctor_schedule.monday
@@ -443,3 +458,8 @@ def countyDoctorView(request, id):
     }
     return render(request, 'healthcare/county_doctor.html', context=context)
 
+# Login View
+class LoginFormView(SuccessMessageMixin, LoginView):
+    template_name = 'registration/login.html'
+    success_url = '/dashboard'
+    success_message = "You were successfully logged in."

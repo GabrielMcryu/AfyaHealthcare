@@ -2,7 +2,11 @@
 {% block title %}Landing Page{% endblock %}
 {% block content %}
 {% load static %}
-
+{% if messages %}
+{% for message in messages %}
+<div class="{{ message.tags }}" id="message-container">{{ message }}</div>
+{% endfor %}
+{% endif %}
 <!-- Landing page -->
 <section class="section-main">
     <div class="container-head">
@@ -96,4 +100,11 @@
     </div>
 </section>
 
+<script type="text/javascript">
+    var registrationSuccess = document.getElementById("message-container");
+
+    setTimeout(function(){ 
+    registrationSuccess.style.display = "none"; 
+    }, 3000);
+</script>
 {% endblock %}

@@ -8,7 +8,16 @@
     <div class="container--head">
         <h2 class="page--heading">Dashboard</h2>
     </div>
-    
+    {% if not doctor_data.has_schedule %}
+    <div class="update">Please create your schedule to start getting appointments</div>
+    {% endif %}
+
+    {% if messages %}
+    {% for message in messages %}
+    <div class="{{ message.tags }}" id="message-container">{{ message }}</div>
+    {% endfor %}
+    {% endif %}
+        
     {% if perms.healthcare.view_region %}
     <div class="container">
         <h3 class="page--sub-header">Doctor's Board</h3>
@@ -61,5 +70,13 @@
         {% endif %}
     </div>
 </section>
+
+<script type="text/javascript">
+    var loginMessage = document.getElementById("message-container");
+
+    setTimeout(function(){ 
+    loginMessage.style.display = "none"; 
+    }, 3000);
+</script>
 
 {% endblock %}

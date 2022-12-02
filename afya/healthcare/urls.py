@@ -29,4 +29,5 @@ urlpatterns = [
     path('our_services/', views.ourServicesView, name='our_services'),
     path('counties/', views.countiesView, name='counties'),
     path('county_doctors/<int:id>', views.countyDoctorView, name='county_doctors'),
+    path('login/', views.LoginFormView.as_view(), name='login'),
 ]
