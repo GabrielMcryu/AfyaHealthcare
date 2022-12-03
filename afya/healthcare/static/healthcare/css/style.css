@@ -807,3 +807,34 @@ body {
 .head--width {
     max-width: 60rem;
 }
+
+/* Message Styling */
+.success {
+    position: absolute;
+    padding: 0.8rem;
+    background-color: #40c057;
+    color: #fff;
+    text-align: center;
+    font-size: 1.4rem;
+    width: 100%;
+}
+
+.warning {
+    position: absolute;
+    padding: 0.8rem;
+    background-color: #fa5252;
+    color: #fff;
+    text-align: center;
+    font-size: 1.4rem;
+    width: 100%;
+}
+
+.update {
+    position: absolute;
+    padding: 0.8rem;
+    background-color: #868e96;
+    color: #fff;
+    text-align: center;
+    font-size: 1.4rem;
+    width: 100%;
+}

@@ -1,5 +1,6 @@
 from django.urls import path
 from . import views
+from django.contrib.auth import views as auth_views
 
 app_name = 'healthcare'
 
@@ -30,4 +31,6 @@ urlpatterns = [
     path('counties/', views.countiesView, name='counties'),
     path('county_doctors/<int:id>', views.countyDoctorView, name='county_doctors'),
     path('login/', views.LoginFormView.as_view(), name='login'),
+    # path('password/', auth_views.PasswordChangeView.as_view(template_name='registration/change_password.html'), name='password'),
+    path('password/', views.PasswordsChangeView.as_view(), name='password')
 ]

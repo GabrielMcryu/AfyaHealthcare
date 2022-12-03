@@ -72,7 +72,7 @@ body {
 
 .section-main {
     height: 85vh;
-    background-image:linear-gradient(0deg,rgba(24,100,171, 0.3), rgba(24,100,171, 0.3)), url("/static/healthcare/img/main.jpg");
+    background-image:linear-gradient(0deg,rgba(24,100,171, 0.3), rgba(24,100,171, 0.3)), url("/static/healthcare/img/main.2ab4db57039c.jpg");
     background-repeat:no-repeat;
     background-size:cover;
 }
@@ -786,7 +786,7 @@ body {
         rgba(78, 204, 235, 0.35),
         rgba(34, 125, 230, 0.35)
       ),
-      url("/static/healthcare/img/view-doctor.jpg");
+      url("/static/healthcare/img/view-doctor.9764ddc0b408.jpg");
     background-size: cover;
     background-position: center;
   }

@@ -62,6 +62,10 @@
             <img class="dashboard--img" src="{% static 'healthcare/img/view-appointments.jpg' %}" />
             <a class="btn--dash" href="{% url 'healthcare:view_appointments' %}">View Appointments</a>
         </div>
+        <div class="dash">
+            <img class="dashboard--img" src="{% static 'healthcare/img/change-password.jpg' %}" />
+            <a class="btn--dash" href="/password">Change Password</a>
+        </div>
         {% if check_doctor < 1 and check_application < 1 %}
         <div class="dash">
             <img class="dashboard--img" src="{% static 'healthcare/img/doctor-application.jpg' %}" />

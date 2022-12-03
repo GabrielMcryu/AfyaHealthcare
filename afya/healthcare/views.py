@@ -7,7 +7,8 @@ from .emails import sendEmail
 from .myfunctions import appointment_availability
 from django.contrib import messages
 from django.contrib.messages.views import SuccessMessageMixin
-from django.contrib.auth.views import LoginView
+from django.contrib.auth.views import LoginView, PasswordChangeView
+from django.contrib.auth.forms import PasswordChangeForm
 
 # View for User registration
 def registerView(request):
@@ -463,3 +464,9 @@ class LoginFormView(SuccessMessageMixin, LoginView):
     template_name = 'registration/login.html'
     success_url = '/dashboard'
     success_message = "You were successfully logged in."
+
+class PasswordsChangeView(SuccessMessageMixin, PasswordChangeView):
+    form_class = PasswordChangeForm
+    template_name ='registration/change_password.html'
+    success_url = '/dashboard'
+    success_message = "You have successfully changed your password"
