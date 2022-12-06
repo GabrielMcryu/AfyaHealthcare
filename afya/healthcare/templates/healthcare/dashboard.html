@@ -8,7 +8,8 @@
     <div class="container--head">
         <h2 class="page--heading">Dashboard</h2>
     </div>
-    {% if not doctor_data.has_schedule %}
+
+    {% if not doctor_data.has_schedule and perms.healthcare.view_region %}
     <div class="update">Please create your schedule to start getting appointments</div>
     {% endif %}
 

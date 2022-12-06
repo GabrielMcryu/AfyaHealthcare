@@ -7,8 +7,8 @@ from .emails import sendEmail
 from .myfunctions import appointment_availability
 from django.contrib import messages
 from django.contrib.messages.views import SuccessMessageMixin
-from django.contrib.auth.views import LoginView, PasswordChangeView
-from django.contrib.auth.forms import PasswordChangeForm
+from django.contrib.auth.views import LoginView, PasswordChangeView, PasswordResetView, PasswordResetConfirmView
+from django.contrib.auth.forms import PasswordChangeForm, PasswordResetForm, SetPasswordForm
 
 # View for User registration
 def registerView(request):
@@ -465,8 +465,29 @@ class LoginFormView(SuccessMessageMixin, LoginView):
     success_url = '/dashboard'
     success_message = "You were successfully logged in."
 
+# Change Password View
 class PasswordsChangeView(SuccessMessageMixin, PasswordChangeView):
     form_class = PasswordChangeForm
     template_name ='registration/change_password.html'
     success_url = '/dashboard'
     success_message = "You have successfully changed your password"
+
+# Send Password Reset Email
+class PasswordResetView(PasswordResetView):
+    form_class = PasswordResetForm
+    template_name = 'registration/password_reset.html'
+    success_url = '/reset_password_sent'
+
+# Reset Password send view
+def resetPasswordSentView(request):
+    return render(request, 'registration/done.html')
+
+# Confirm Password reset View
+class PasswordResetConfirmView(PasswordResetConfirmView):
+    form_class = SetPasswordForm
+    template_name = 'registration/set_password.html'
+    success_url = '/reset_password_complete'
+
+# Password reset complete view
+def resetPasswordCompleteView(request):
+    return render(request, 'registration/complete.html')

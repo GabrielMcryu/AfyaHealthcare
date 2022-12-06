@@ -32,5 +32,9 @@ urlpatterns = [
     path('county_doctors/<int:id>', views.countyDoctorView, name='county_doctors'),
     path('login/', views.LoginFormView.as_view(), name='login'),
     # path('password/', auth_views.PasswordChangeView.as_view(template_name='registration/change_password.html'), name='password'),
-    path('password/', views.PasswordsChangeView.as_view(), name='password')
+    path('password/', views.PasswordsChangeView.as_view(), name='password'),
+    path('reset_password/', views.PasswordResetView.as_view(), name='reset_password'),
+    path('reset_password_sent/', views.resetPasswordSentView, name="reset_password_done"),
+    path('reset/<uidb64>/<token>/', views.PasswordResetConfirmView.as_view(), name="password_reset_confirm"),
+    path('reset_password_complete/', views.resetPasswordCompleteView, name="password_reset_complete")
 ]

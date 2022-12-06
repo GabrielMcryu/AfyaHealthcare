@@ -6,12 +6,12 @@ Afya healthcare is a web application that allows users to easily access the serv
 - [Project Design Diagrams](#project-design-diagrams)
 - [Features](#features)
 - [Requirements](#requirements)
-- [Installation Guide](#installation-guide)
 ***
 ## Technologies Used
 - [Python 3.10](https://www.python.org/downloads/release/python-3108/)
 - [Django 4](https://www.djangoproject.com/download/)
 - [Sqlite Database](https://www.sqlite.org/index.html)
+- [Postgres Database (Deployment)](https://www.postgresql.org/)
 - [Html/Css](https://www.w3.org/standards/webdesign/htmlcss)
 - [Jquery UI](https://releases.jquery.com/ui/)
 - [Gmail](https://www.google.com/gmail/about/)
@@ -30,43 +30,3 @@ There is also an email sending feature to alert the user whether his appointment
 To run this application, the user needs to have python3 installed in their system. They can download it [here](https://www.python.org/downloads/release/python-3108/).\
 You will also need an email account to send emails to the users.
 ***
-## Installation Guide
-To run this application, you first need to create a directory:
-```bash
-mkdir 'your directory'
-```
-Enter your directory and create a virtual environment:
-```bash
-pip install virtualenv
-python3.10 -m venv env
-```
-Activate the virtual environment:
-```bash
-source env/bin/activate
-```
-clone the repository
-```bash
-git clone https://github.com/GabrielMcryu/AfyaHealthcare.git
-```
-Install the requirements
-```bash
-pip install -r requirements.txt
-```
-Enter the directory
-```bash
-cd afya
-```
-Inside settings.py scroll down to the bottom and install the Email settings with yours.
-Make migrations with this command in the terminal
-```bash
-python manage.py makemigrations
-python manage.py migrate
-```
-Create a superuser running this command in the terminal
-```bash
-python manage.py createsuperuser
-```
-Run the app
-```bash
-python manage.py runserver
-```
