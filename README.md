@@ -30,3 +30,4 @@ There is also an email sending feature to alert the user whether his appointment
 To run this application, the user needs to have python3 installed in their system. They can download it [here](https://www.python.org/downloads/release/python-3108/).\
 You will also need an email account to send emails to the users.
 ***
+You can view the live site [here](https://afyahealthcare-production.up.railway.app/)
